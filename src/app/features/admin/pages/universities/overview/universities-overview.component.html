@@ -1,0 +1,294 @@
+<section class="px-10 py-5 space-y-5">
+
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-medium">Universidades (15)</h1>
+
+    <div class="flex items-center text-sm gap-x-2">
+      <input type="text" class="input" placeholder="Buscar Universidad">
+      <a routerLink="../agregar" class="btn-primary">Agregar</a>
+    </div>
+  </div>
+
+  <!-- Start Table -->
+  <div class="flex flex-col border rounded-md">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle">
+        <div class="overflow-hidden">
+          <table class="min-w-full divide-y divide-white">
+            <thead class="text-white bg-[var(--color-primary)]">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-xs font-medium uppercase text-start">Nombre</th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium text-center uppercase">Practicantes</th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium text-center uppercase">Horas Sem.</th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium text-center uppercase">Habilitado</th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium text-center uppercase">accion</th>
+              </tr>
+            </thead>
+            <tbody class="font-medium text-white uppercase bg-gray-200 divide-y divide-white">
+
+              <tr routerLink="../idUniversidad" class="cursor-pointer hover:bg-white">
+                <td class="px-6 py-2 text-sm font-medium text-gray-800 whitespace-nowrap">Universidad Nacional Pedro Ruiz Gallo</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">45</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">15 hrs.</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">SI</td>
+                <td class="px-6 py-2 text-sm font-medium whitespace-nowrap text-end">
+                  <div class="flex items-center gap-x-2 justify-self-center">
+                    <a routerLink="../editar/idUniversidad" class="btn-primary">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path
+                          d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z" />
+                      </svg>
+                    </a>
+                    <button type="button" class="btn-danger">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr routerLink="../idUniversidad" class="cursor-pointer hover:bg-white">
+                <td class="px-6 py-2 text-sm font-medium text-gray-800 whitespace-nowrap">Universidad Tecnológica del Perú</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">45</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">15 hrs.</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">SI</td>
+                <td class="px-6 py-2 text-sm font-medium whitespace-nowrap text-end">
+                  <div class="flex items-center gap-x-2 justify-self-center">
+                    <button type="button" class="btn-primary">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path
+                          d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z" />
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-danger">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr routerLink="../idUniversidad" class="cursor-pointer hover:bg-white">
+                <td class="px-6 py-2 text-sm font-medium text-gray-800 whitespace-nowrap">Universidad Santo Toribio de Mogrovejo</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">45</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">15 hrs.</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">SI</td>
+                <td class="px-6 py-2 text-sm font-medium whitespace-nowrap text-end">
+                  <div class="flex items-center gap-x-2 justify-self-center">
+                    <button type="button" class="btn-primary">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path
+                          d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z" />
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-danger">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr routerLink="../idUniversidad" class="cursor-pointer hover:bg-white">
+                <td class="px-6 py-2 text-sm font-medium text-gray-800 whitespace-nowrap">Universidad Señor de Sipan</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">45</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">15 hrs.</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">SI</td>
+                <td class="px-6 py-2 text-sm font-medium whitespace-nowrap text-end">
+                  <div class="flex items-center gap-x-2 justify-self-center">
+                    <button type="button" class="btn-primary">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path
+                          d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z" />
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-danger">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr routerLink="../idUniversidad" class="cursor-pointer hover:bg-white">
+                <td class="px-6 py-2 text-sm font-medium text-gray-800 whitespace-nowrap">Universidad Nacional Pedro Ruiz Gallo</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">45</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">15 hrs.</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">SI</td>
+                <td class="px-6 py-2 text-sm font-medium whitespace-nowrap text-end">
+                  <div class="flex items-center gap-x-2 justify-self-center">
+                    <button type="button" class="btn-primary">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path
+                          d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z" />
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-danger">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr routerLink="../idUniversidad" class="cursor-pointer hover:bg-white">
+                <td class="px-6 py-2 text-sm font-medium text-gray-800 whitespace-nowrap">Universidad Tecnológica del Perú</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">45</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">15 hrs.</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">SI</td>
+                <td class="px-6 py-2 text-sm font-medium whitespace-nowrap text-end">
+                  <div class="flex items-center gap-x-2 justify-self-center">
+                    <button type="button" class="btn-primary">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path
+                          d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z" />
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-danger">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr routerLink="../idUniversidad" class="cursor-pointer hover:bg-white">
+                <td class="px-6 py-2 text-sm font-medium text-gray-800 whitespace-nowrap">Universidad Santo Toribio de Mogrovejo</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">45</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">15 hrs.</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">SI</td>
+                <td class="px-6 py-2 text-sm font-medium whitespace-nowrap text-end">
+                  <div class="flex items-center gap-x-2 justify-self-center">
+                    <button type="button" class="btn-primary">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path
+                          d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z" />
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-danger">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr routerLink="../idUniversidad" class="cursor-pointer hover:bg-white">
+                <td class="px-6 py-2 text-sm font-medium text-gray-800 whitespace-nowrap">Universidad Señor de Sipan</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">45</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">15 hrs.</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">SI</td>
+                <td class="px-6 py-2 text-sm font-medium whitespace-nowrap text-end">
+                  <div class="flex items-center gap-x-2 justify-self-center">
+                    <button type="button" class="btn-primary">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path
+                          d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z" />
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-danger">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr routerLink="../idUniversidad" class="cursor-pointer hover:bg-white">
+                <td class="px-6 py-2 text-sm font-medium text-gray-800 whitespace-nowrap">Universidad Santo Toribio de Mogrovejo</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">45</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">15 hrs.</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">SI</td>
+                <td class="px-6 py-2 text-sm font-medium whitespace-nowrap text-end">
+                  <div class="flex items-center gap-x-2 justify-self-center">
+                    <button type="button" class="btn-primary">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path
+                          d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z" />
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-danger">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr routerLink="../idUniversidad" class="cursor-pointer hover:bg-white">
+                <td class="px-6 py-2 text-sm font-medium text-gray-800 whitespace-nowrap">Universidad Señor de Sipan</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">45</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">15 hrs.</td>
+                <td class="px-6 py-2 text-sm text-center text-gray-800 whitespace-nowrap">SI</td>
+                <td class="px-6 py-2 text-sm font-medium whitespace-nowrap text-end">
+                  <div class="flex items-center gap-x-2 justify-self-center">
+                    <button type="button" class="btn-primary">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
+                        <path
+                          d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z" />
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-danger">
+                      <svg class="text-white size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="flex items-center justify-between px-6">
+    <p>192 resultados</p>
+    <div class="flex items-center text-sm font-medium gap-x-1">
+      <button class="bg-[var(--color-primary)] text-white flex items-center justify-center border rounded-md size-6">1</button>
+      <button class=" hover:bg-[var(--color-primary)] hover:text-white flex items-center justify-center border rounded-md size-6">2</button>
+      <button class=" hover:bg-[var(--color-primary)] hover:text-white flex items-center justify-center rounded-md size-6">3</button>
+      <p class="font-medium">...</p>
+    </div>
+  </div>
+  <!-- End Table -->
+
+  <div class="grid gap-x-5">
+
+    <section class="border rounded-md">
+      <div class="flex items-center p-4 border-b gap-x-2">
+        <svg class="size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+          <path
+            d="M304 240l0-223.4c0-9 7-16.6 16-16.6C443.7 0 544 100.3 544 224c0 9-7.6 16-16.6 16L304 240zM32 272C32 150.7 122.1 50.3 239 34.3c9.2-1.3 17 6.1 17 15.4L256 288 412.5 444.5c6.7 6.7 6.2 17.7-1.5 23.1C371.8 495.6 323.8 512 272 512C139.5 512 32 404.6 32 272zm526.4 16c9.3 0 16.6 7.8 15.4 17c-7.7 55.9-34.6 105.6-73.9 142.3c-6 5.6-15.4 5.2-21.2-.7L320 288l238.4 0z" />
+        </svg>
+        <p>Horas / Universidad</p>
+      </div>
+      <div class="w-full p-4 h-80">
+
+      </div>
+    </section>
+
+  </div>
+
+</section>

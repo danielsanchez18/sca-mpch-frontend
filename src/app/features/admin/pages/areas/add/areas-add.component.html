@@ -1,0 +1,47 @@
+<section class="px-10 py-5 space-y-5">
+
+  <div class="flex items-center gap-x-3">
+    <a routerLink="../overview" class="p-2 text-gray-300 rounded-full hover:text-black">
+      <svg class="size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+      </svg>
+    </a>
+    <h1 class="text-2xl font-medium">Registrar Área</h1>
+  </div>
+
+  <form action="" class="px-11">
+
+    <div class="w-full space-y-5">
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="">Nombre:</label>
+        <input type="text" class="input" placeholder="Ingrese el nombre del área">
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="">Número de vacantes:</label>
+        <input type="number" class="input" placeholder="Ingrese el número maximo de vacantes">
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="">Número de horas mínimas para certificación:</label>
+        <input type="number" class="input" placeholder="Ingrese el número horas mínimas">
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="">Estado:</label>
+        <select class="input" name="" id="">
+          <option value="habilitado">Habilitado</option>
+          <option value="deshabilitado">Deshabilitado</option>
+        </select>
+      </div>
+
+      <div class="flex items-center gap-x-2">
+        <button type="submit" class="w-full text-sm btn-primary">Registrar Área</button>
+        <button type="submit" class="w-full px-4 py-2 text-sm font-medium border rounded-md hover:bg-gray-100">Cancelar</button>
+      </div>
+    </div>
+
+  </form>
+
+
+</section>

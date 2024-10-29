@@ -1,0 +1,120 @@
+<section class="px-10 py-5 space-y-5">
+
+  <div class="flex items-center gap-x-3">
+    <a routerLink="../../overview" class="p-2 text-gray-300 rounded-full hover:text-black">
+      <svg class="size-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path
+          d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+      </svg>
+    </a>
+    <h1 class="text-2xl font-medium">Editar Usuario</h1>
+  </div>
+
+  <form action="" class="items-center px-11">
+
+    <div class="w-full space-y-5">
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="">Nombres:</label>
+        <input type="text" class="input" placeholder="Ingrese los nombres del usuario">
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="">Apellidos:</label>
+        <input type="text" class="input" placeholder="Ingrese los apellidos del usuario">
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="">Edad</label>
+        <input type="number" class="input" placeholder="Ingrese la edad del usuario">
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="">Rol:</label>
+        <select class="input" name="" id="">
+          <option value="administrador">Administrador</option>
+          <option value="supervisor">Supervisor</option>
+          <option value="practicante">Practicante</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="">Área:</label>
+        <select class="input" name="" id="">
+          <option value="Sistemas">Ingeniería de Sistemas</option>
+          <option value="Abogado">Abogado</option>
+          <option value="Programador">Programador</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="">Universidad:</label>
+        <select class="input" name="" id="">
+          <option value="UTP">Universidad Tecnológica del Perú</option>
+          <option value="UNPRG">Universidad Nacional Pedro Ruiz Gallo</option>
+          <option value="USS">Universidad Señor de Sipán</option>
+          <option value="USAT">Universidad Santo Toribio de Mogrovejo</option>
+        </select>
+      </div>
+
+      <div data-hs-file-upload='{
+        "url": "/upload",
+        "acceptedFiles": "image/*",
+        "maxFiles": 1,
+        "singleton": true
+      }'>
+        <template data-hs-file-upload-preview="">
+          <div class="size-40">
+            <img class="object-contain w-full rounded-full" data-dz-thumbnail="">
+          </div>
+        </template>
+
+        <div class="flex items-center gap-3 justify-self-center sm:gap-5">
+          <div class="group" data-hs-file-upload-previews="" data-hs-file-upload-pseudo-trigger="">
+            <span
+              class="group-has-[div]:hidden flex shrink-0 justify-center items-center size-16 border-2 border-dotted border-gray-300 text-gray-400 cursor-pointer rounded-full hover:bg-gray-50 ">
+              <svg class="size-6 shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z" />
+              </svg>
+            </span>
+          </div>
+
+          <div class="grow">
+            <div class="flex items-center gap-x-2">
+              <button type="button" class="flex items-center text-sm btn-primary gap-x-2"
+                data-hs-file-upload-trigger="">
+                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" x2="12" y1="3" y2="15"></line>
+                </svg>
+                Subir foto
+              </button>
+              <button type="button"
+                class="px-4 py-2 text-sm font-medium border border-gray-300 rounded-md hover:bg-gray-100"
+                data-hs-file-upload-clear="">Quitar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="">Estado:</label>
+        <select class="input" name="" id="">
+          <option value="habilitado">Habilitado</option>
+          <option value="deshabilitado">Deshabilitado</option>
+        </select>
+      </div>
+
+      <div class="flex items-center gap-x-2">
+        <button type="submit" class="w-full text-sm btn-primary">Registrar Practicante</button>
+        <button type="submit"
+          class="w-full px-4 py-2 text-sm font-medium border rounded-md hover:bg-gray-100">Cancelar</button>
+      </div>
+    </div>
+
+  </form>
+
+
+</section>
