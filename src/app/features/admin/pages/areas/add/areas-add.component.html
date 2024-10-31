@@ -9,35 +9,58 @@
     <h1 class="text-2xl font-medium">Registrar Área</h1>
   </div>
 
-  <form action="" class="px-11">
+  <form (ngSubmit)="onSubmit()" #areaForm="ngForm" class="px-11">
 
     <div class="w-full space-y-5">
       <div class="flex flex-col space-y-2 text-sm">
-        <label for="">Nombre:</label>
-        <input type="text" class="input" placeholder="Ingrese el nombre del área">
+        <label for="name">Nombre:</label>
+        <input [(ngModel)]="area.name" name="name" required minlength="3" maxlength="25"
+        type="text" class="input" placeholder="Ingrese el nombre del área">
+
+        <!-- Validaciones -->
+        <div *ngIf="areaForm.controls['name']?.invalid && (areaForm.controls['name']?.touched || areaForm.controls['name']?.dirty)" class="text-xs text-red-500">
+          <div *ngIf="areaForm.controls['name']?.errors?.['required']">El nombre es requerido.</div>
+          <div *ngIf="areaForm.controls['name']?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</div>
+          <div *ngIf="areaForm.controls['name']?.errors?.['maxlength']">El nombre no puede exceder los 25 caracteres.</div>
+        </div>
+
       </div>
 
       <div class="flex flex-col space-y-2 text-sm">
-        <label for="">Número de vacantes:</label>
-        <input type="number" class="input" placeholder="Ingrese el número maximo de vacantes">
+        <label for="nro_vacancies">Número de vacantes:</label>
+        <input [(ngModel)]="area.nro_vacancies" name="nro_vacancies" required min="1"
+        type="number" class="input" placeholder="Ingrese el número maximo de vacantes">
+
+        <!-- Validaciones -->
+        <div *ngIf="areaForm.controls['nro_vacancies']?.invalid && (areaForm.controls['nro_vacancies']?.touched || areaForm.controls['nro_vacancies']?.dirty)" class="text-xs text-red-500">
+          <div *ngIf="areaForm.controls['nro_vacancies']?.errors?.['required']">El número de vacantes es requerido.</div>
+          <div *ngIf="areaForm.controls['nro_vacancies']?.errors?.['min']">El número de vacantes debe ser mayor a 0.</div>
+        </div>
       </div>
 
       <div class="flex flex-col space-y-2 text-sm">
-        <label for="">Número de horas mínimas para certificación:</label>
-        <input type="number" class="input" placeholder="Ingrese el número horas mínimas">
+        <label for="hours_certified">Número de horas mínimas para certificación:</label>
+        <input [(ngModel)]="area.hours_certified" name="hours_certified" required min="1"
+        type="number" class="input" placeholder="Ingrese el número horas mínimas">
+
+        <!-- Validaciones -->
+        <div *ngIf="areaForm.controls['hours_certified']?.invalid && (areaForm.controls['hours_certified']?.touched || areaForm.controls['hours_certified']?.dirty)" class="text-xs text-red-500">
+          <div *ngIf="areaForm.controls['hours_certified']?.errors?.['required']">El número de horas mínimas es requerido.</div>
+          <div *ngIf="areaForm.controls['hours_certified']?.errors?.['min']">El número de horas mínimas debe ser mayor a 0.</div>
+        </div>
       </div>
 
       <div class="flex flex-col space-y-2 text-sm">
-        <label for="">Estado:</label>
-        <select class="input" name="" id="">
-          <option value="habilitado">Habilitado</option>
-          <option value="deshabilitado">Deshabilitado</option>
+        <label for="status">Estado:</label>
+        <select [(ngModel)]="area.status" name="status" class="input" required>
+          <option [value]="true">Habilitado</option>
+          <option [value]="false">Deshabilitado</option>
         </select>
       </div>
 
       <div class="flex items-center gap-x-2">
-        <button type="submit" class="w-full text-sm btn-primary">Registrar Área</button>
-        <button type="submit" class="w-full px-4 py-2 text-sm font-medium border rounded-md hover:bg-gray-100">Cancelar</button>
+        <button type="submit" class="w-full text-sm btn-primary disabled:text-black disabled:bg-white disabled:border-gray-200 disabled:pointer-events-none" [disabled]="areaForm.invalid">Registrar Área</button>
+        <a routerLink="../overview" class="w-full px-4 py-2 text-sm font-medium text-center border rounded-md hover:bg-gray-100">Cancelar</a>
       </div>
     </div>
 

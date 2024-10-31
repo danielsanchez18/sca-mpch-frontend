@@ -9,7 +9,7 @@
     <h1 class="text-2xl font-medium">Agregar Universidad</h1>
   </div>
 
-  <form action="" class="items-center grid grid-cols-[auto_1fr] gap-x-10">
+  <form (ngSubmit)="onSubmit()" #universityForm="ngForm" class="items-center grid grid-cols-[auto_1fr] gap-x-10">
 
     <div class="w-full px-10">
       <div data-hs-file-upload='{
@@ -60,21 +60,42 @@
 
     <div class="w-full space-y-5">
       <div class="flex flex-col space-y-2 text-sm">
-        <label for="">Nombre:</label>
-        <input type="text" class="input" placeholder="Ingrese el nombre de la Universidad">
+        <label for="name">Nombre:</label>
+        <input [(ngModel)]="university.name" name="name" required minlength="3" maxlength="100"
+        type="text" class="input" placeholder="Ingrese el nombre de la Universidad">
+
+        <!-- Validaciones -->
+        <div *ngIf="universityForm.controls['name']?.invalid && (universityForm.controls['name']?.touched || universityForm.controls['name']?.dirty)" class="text-xs text-red-500">
+          <div *ngIf="universityForm.controls['name']?.errors?.['required']">El nombre es requerido.</div>
+          <div *ngIf="universityForm.controls['name']?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</div>
+          <div *ngIf="universityForm.controls['name']?.errors?.['maxlength']">El nombre no puede exceder los 100 caracteres.</div>
+        </div>
       </div>
 
       <div class="flex flex-col space-y-2 text-sm">
-        <label for="">Estado:</label>
-        <select class="input" name="" id="">
-          <option value="habilitado">Habilitado</option>
-          <option value="deshabilitado">Deshabilitado</option>
+        <label for="name">Acrónimo:</label>
+        <input [(ngModel)]="university.acronym" name="acronym" required minlength="3" maxlength="10"
+        type="text" class="input" placeholder="Ingrese el nombre de la Universidad">
+
+        <!-- Validaciones -->
+        <div *ngIf="universityForm.controls['acronym']?.invalid && (universityForm.controls['acronym']?.touched || universityForm.controls['acronym']?.dirty)" class="text-xs text-red-500">
+          <div *ngIf="universityForm.controls['acronym']?.errors?.['required']">El nombre es requerido.</div>
+          <div *ngIf="universityForm.controls['acronym']?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</div>
+          <div *ngIf="universityForm.controls['acronym']?.errors?.['maxlength']">El nombre no puede exceder los 10 caracteres.</div>
+        </div>
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="status">Estado:</label>
+        <select [(ngModel)]="university.status" name="status" class="input" required>
+          <option [value]="true">Habilitado</option>
+          <option [value]="false">Deshabilitado</option>
         </select>
       </div>
 
       <div class="flex items-center gap-x-2">
-        <button type="submit" class="w-full text-sm btn-primary">Registrar Universidad</button>
-        <button type="submit" class="w-full px-4 py-2 text-sm font-medium border rounded-md hover:bg-gray-100">Cancelar</button>
+        <button type="submit" class="w-full text-sm btn-primary disabled:text-black disabled:bg-white disabled:border-gray-200 disabled:pointer-events-none" [disabled]="universityForm.invalid">Registrar Universidad</button>
+        <a routerLink="../overview" class="w-full px-4 py-2 text-sm font-medium text-center border rounded-md hover:bg-gray-100">Cancelar</a>
       </div>
     </div>
 

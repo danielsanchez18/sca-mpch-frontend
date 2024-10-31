@@ -45,7 +45,7 @@ const routes: Routes = [
             path: 'editar/:id', component: AdminUniversitiesEditComponent
           },
           {
-            path: ':id', component: AdminUniversitiesDetailsComponent
+            path: ':idUniversity', component: AdminUniversitiesDetailsComponent
           }
 
         ]
@@ -95,10 +95,10 @@ const routes: Routes = [
             path: 'agregar', component: AdminInternsAddComponent
           },
           {
-            path: 'editar/:id', component: AdminInternsEditComponent
+            path: 'editar/:idIntern', component: AdminInternsEditComponent
           },
           {
-            path: ':id', component: AdminInternsDetailsComponent
+            path: ':idIntern', component: AdminInternsDetailsComponent
           }
 
         ]

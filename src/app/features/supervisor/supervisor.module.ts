@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AssistantRoutingModule } from './assistant-routing.module';
+import { SupervisorRoutingModule } from './supervisor-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    AssistantRoutingModule
+    SupervisorRoutingModule
   ]
 })
-export class AssistantModule { }
+export class SupervisorModule { }

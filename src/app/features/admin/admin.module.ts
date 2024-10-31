@@ -29,6 +29,8 @@ import { AdminUsersEditComponent } from './pages/users/edit/users-edit.component
 import { AdminUsersDetailsComponent } from './pages/users/details/users-details.component';
 import { AdminCertificatesOverviewComponent } from './pages/certificates/overview/certificates-overview.component';
 import { AdminCertificatesAddComponent } from './pages/certificates/add/certificates-add.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -72,7 +74,9 @@ import { AdminCertificatesAddComponent } from './pages/certificates/add/certific
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    FormsModule,
+    SharedModule,
+    HttpClientModule
   ]
 })
 export class AdminModule { }

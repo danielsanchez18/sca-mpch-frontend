@@ -10,41 +10,84 @@
     <h1 class="text-2xl font-medium">Editar Practicante</h1>
   </div>
 
-  <form action="" class="items-center px-11">
+  <form (ngSubmit)="updateIntern()" #internForm="ngForm" class="items-center px-11">
 
     <div class="w-full space-y-5">
       <div class="flex flex-col space-y-2 text-sm">
-        <label for="">Nombres:</label>
-        <input type="text" class="input" placeholder="Ingrese los nombres del Practicante">
+        <label for="name">Nombres:</label>
+        <input [(ngModel)]="intern.user.name" name="name" required minlength="3" maxlength="30"
+        type="text" class="input" placeholder="Ingrese los nombres del Practicante">
+
+        <!-- Validaciones -->
+        <div *ngIf="internForm.controls['name']?.invalid && (internForm.controls['name']?.touched || internForm.controls['name']?.dirty)" class="text-xs text-red-500">
+          <div *ngIf="internForm.controls['name']?.errors?.['required']">El nombre es requerido.</div>
+          <div *ngIf="internForm.controls['name']?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</div>
+          <div *ngIf="internForm.controls['name']?.errors?.['maxlength']">El nombre no puede exceder los 30 caracteres.</div>
+        </div>
       </div>
 
       <div class="flex flex-col space-y-2 text-sm">
-        <label for="">Apellidos:</label>
-        <input type="text" class="input" placeholder="Ingrese los apellidos del Practicante">
+        <label for="lastname">Apellidos:</label>
+        <input [(ngModel)]="intern.user.lastname" name="lastname" required minlength="3" maxlength="30"
+        type="text" class="input" placeholder="Ingrese los apellidos del Practicante">
+
+        <!-- Validaciones -->
+        <div *ngIf="internForm.controls['lastname']?.invalid && (internForm.controls['lastname']?.touched || internForm.controls['lastname']?.dirty)" class="text-xs text-red-500">
+          <div *ngIf="internForm.controls['lastname']?.errors?.['required']">El apellido es requerido.</div>
+          <div *ngIf="internForm.controls['lastname']?.errors?.['minlength']">El apellido debe tener al menos 3 caracteres.</div>
+          <div *ngIf="internForm.controls['lastname']?.errors?.['maxlength']">El apellido no puede exceder los 30 caracteres.</div>
+        </div>
+      </div>
+
+      <div class="flex flex-col space-y-2 text-sm">
+        <label for="dni">DNI:</label>
+        <input [(ngModel)]="intern.user.dni" name="dni" required minlength="8" maxlength="8"
+        type="text" class="input" placeholder="Ingrese el DNI del Practicante">
+
+        <!-- Validaciones -->
+        <div *ngIf="internForm.controls['dni']?.invalid && (internForm.controls['dni']?.touched || internForm.controls['dni']?.dirty)" class="text-xs text-red-500">
+          <div *ngIf="internForm.controls['dni']?.errors?.['required']">El dni es requerido.</div>
+          <div *ngIf="internForm.controls['dni']?.errors?.['minlength']">El dni debe tener 8 caracteres.</div>
+          <div *ngIf="internForm.controls['dni']?.errors?.['maxlength']">El nombre no puede exceder los 8 caracteres.</div>
+        </div>
       </div>
 
       <div class="flex flex-col space-y-2 text-sm">
         <label for="">Edad</label>
-        <input type="number" class="input" placeholder="Ingrese la edad del practicante">
+        <input [(ngModel)]="intern.user.age" name="age" required min="18" max="80"
+        type="number" class="input" placeholder="Ingrese la edad del practicante">
+
+        <!-- Validaciones -->
+        <div *ngIf="internForm.controls['age']?.invalid && (internForm.controls['age']?.touched || internForm.controls['age']?.dirty)" class="text-xs text-red-500">
+          <div *ngIf="internForm.controls['age']?.errors?.['required']">La edad es requerida.</div>
+          <div *ngIf="internForm.controls['age']?.errors?.['min']">La edad debe ser mayor a 18.</div>
+          <div *ngIf="internForm.controls['age']?.errors?.['max']">Ingrese un valor correcto.</div>
+        </div>
       </div>
 
       <div class="flex flex-col space-y-2 text-sm">
         <label for="">Área:</label>
-        <select class="input" name="" id="">
-          <option value="Sistemas">Ingeniería de Sistemas</option>
-          <option value="Abogado">Abogado</option>
-          <option value="Programador">Programador</option>
+        <select required class="input" [(ngModel)]="selectedArea" (change)="onAreaChange($event)" name="area" required>
+          <option *ngFor="let area of areas" [value]="area.idArea">{{ area.name }}</option>
+
+          <!-- Validaciones -->
+        <div *ngIf="internForm.controls['area']?.invalid && (internForm.controls['area']?.touched || internForm.controls['area']?.dirty)" class="text-xs text-red-500">
+          <div *ngIf="internForm.controls['area']?.errors?.['area']">El área es requerida.</div>
+        </div>
         </select>
       </div>
 
       <div class="flex flex-col space-y-2 text-sm">
         <label for="">Universidad:</label>
-        <select class="input" name="" id="">
-          <option value="UTP">Universidad Tecnológica del Perú</option>
-          <option value="UNPRG">Universidad Nacional Pedro Ruiz Gallo</option>
-          <option value="USS">Universidad Señor de Sipán</option>
-          <option value="USAT">Universidad Santo Toribio de Mogrovejo</option>
+        <select required class="input" [(ngModel)]="selectedUniversity" (change)="onUniversityChange($event)" name="university" required>
+          <option *ngFor="let university of universities" [value]="university.idUniversity">{{ university.name }}</option>
         </select>
+
+
+        <!-- Validaciones -->
+        <div *ngIf="internForm.controls['university']?.invalid && (internForm.controls['university']?.touched || internForm.controls['university']?.dirty)" class="text-xs text-red-500">
+          <div *ngIf="internForm.controls['university']?.errors?.['university']">La universidad es requerida.</div>
+        </div>
       </div>
 
       <div data-hs-file-upload='{
@@ -91,17 +134,16 @@
       </div>
 
       <div class="flex flex-col space-y-2 text-sm">
-        <label for="">Estado:</label>
-        <select class="input" name="" id="">
-          <option value="habilitado">Habilitado</option>
-          <option value="deshabilitado">Deshabilitado</option>
+        <label for="status">Estado:</label>
+        <select [(ngModel)]="intern.user.status" name="status" class="input" required>
+          <option [value]="true">Habilitado</option>
+          <option [value]="false">Deshabilitado</option>
         </select>
       </div>
 
       <div class="flex items-center gap-x-2">
-        <button type="submit" class="w-full text-sm btn-primary">Registrar Practicante</button>
-        <button type="submit"
-          class="w-full px-4 py-2 text-sm font-medium border rounded-md hover:bg-gray-100">Cancelar</button>
+        <button type="submit" class="w-full text-sm btn-primary disabled:text-black disabled:bg-white disabled:border-gray-200 disabled:pointer-events-none" [disabled]="internForm.invalid">Registrar Área</button>
+        <a routerLink="../../overview" class="w-full px-4 py-2 text-sm font-medium text-center border rounded-md hover:bg-gray-100">Cancelar</a>
       </div>
     </div>
 

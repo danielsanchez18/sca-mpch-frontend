@@ -14,8 +14,8 @@ const routes: Routes = [
     loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule)
   },
   {
-    path: 'asistente',
-    loadChildren: () => import('./features/assistant/assistant.module').then(m => m.AssistantModule)
+    path: 'supervisor',
+    loadChildren: () => import('./features/supervisor/supervisor.module').then(m => m.SupervisorModule)
   }
 ];
 
