@@ -1,0 +1,30 @@
+<section class="flex w-full h-screen bg-opacity-100 bg-background">
+
+  <div class="px-16 py-10 mx-auto my-auto space-y-8 bg-white border w-fit h-fit rounded-xl">
+
+    <div class="space-y-3 text-center max-w-72">
+      <img src="img/logo.PNG" class="size-20 justify-self-center" alt="">
+      <h1 class="text-lg font-extrabold leading-6 uppercase">Municipalidad provincial de Chiclayo</h1>
+      <p class="text-sm font-medium">Sistema de Control de Asistencias</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="space-y-5">
+
+      <div class="flex flex-col space-y-1">
+        <label for="dni" class="text-xs font-semibold">DNI:</label>
+        <input type="text" id="dni" name="dni" [(ngModel)]="dni" placeholder="Ingrese su DNI" class="input">
+      </div>
+
+      <div class="flex flex-col space-y-1">
+        <label for="password" class="text-xs font-semibold">Contraseña:</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Ingrese su contraseña" class="input">
+      </div>
+
+      <button type="submit" class="w-full btn-primary">Ingresar</button>
+
+      <!-- <div *ngIf="errorMessage" class="mt-2 text-sm text-red-500">{{ errorMessage }}</div> -->
+    </form>
+
+  </div>
+
+</section>

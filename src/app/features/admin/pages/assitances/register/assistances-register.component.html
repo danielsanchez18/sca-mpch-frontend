@@ -1,0 +1,29 @@
+<section class="w-full h-full px-20 py-10 space-y-10">
+
+  <div class="grid grid-cols-[1fr_auto] gap-x-5 gap-y-10">
+    <div class="w-full space-y-2 text-center">
+      <h1>Registrar Asistencias</h1>
+      <p class="text-sm">Ingrese el DNI y selecciona si está entrando o saliendo.</p>
+    </div>
+
+    <a routerLink="overview" class="text-xs btn-primary h-fit">Ver Reporte</a>
+
+    <form action="" class="space-y-10 row-start-2 text-center w-full max-w-[35rem] mx-auto">
+      <div class="space-y-2">
+        <p class="text-sm font-semibold">Hora de Registro</p>
+        <h2 class="text-lg text-primary-dark">27/11/2024 - 12:18:23</h2>
+      </div>
+
+      <div class="flex flex-col space-y-2">
+        <label class="text-sm font-semibold">DNI del Practicante</label>
+        <input type="text" class="input" placeholder="Ingrese su DNI">
+      </div>
+
+      <div class="flex items-center gap-x-3">
+        <button class="w-full btn-primary">ENTRADA</button>
+        <button class="w-full btn-danger">SALIDA</button>
+      </div>
+    </form>
+  </div>
+
+</section>

@@ -1,0 +1,86 @@
+<section class="w-full h-full px-20 py-10 space-y-10">
+
+  <div class="flex items-center justify-between gap-x-3">
+    <h1>Panel de Certificaciones</h1>
+    <input type="text" class="text-xs input" placeholder="Buscar practicante">
+  </div>
+
+  <section class="flex flex-col space-y-10">
+
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle space-y-5">
+
+        <div class="overflow-hidden rounded-md">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-primary">
+              <tr class="text-xs text-white uppercase">
+                <th scope="col" class="px-6 py-3 font-medium text-start">practicante</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">estado</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">fecha de creacion</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">accion</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y-2 divide-white">
+              <tr routerLink="/admin/usuarios/practicantes/1" class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-white">
+                <td class="px-6 py-2.5 whitespace-nowrap">nombre completo del practicante</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">disponible</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">-</td>
+                <td class="px-6 py-2.5 whitespace-nowrap text-end">
+                  <div class="flex items-center justify-center gap-x-3">
+                    <button type="button" title="Generar certificado" class="px-3 text-xs font-semibold btn-danger">Generar</button>
+                  </div>
+                </td>
+              </tr>
+              <tr routerLink="/admin/usuarios/practicantes/1" class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-white">
+                <td class="px-6 py-2.5 whitespace-nowrap">nombre completo del practicante</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">disponible</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">10-11-2024</td>
+                <td class="px-6 py-2.5 whitespace-nowrap text-end">
+                  <div class="flex items-center justify-center gap-x-3">
+                    <a routerLink="1" title="Ver certificado" class="px-3 text-xs font-semibold capitalize btn-primary">Ver</a>
+                  </div>
+                </td>
+              </tr>
+              <tr routerLink="/admin/usuarios/practicantes/1" class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-white">
+                <td class="px-6 py-2.5 whitespace-nowrap">nombre completo del practicante</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">disponible</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">10-11-2024</td>
+                <td class="px-6 py-2.5 whitespace-nowrap text-end">
+                  <div class="flex items-center justify-center gap-x-3">
+                    <a routerLink="1" title="Ver certificado" class="px-3 text-xs font-semibold capitalize btn-primary">Ver</a>
+                  </div>
+                </td>
+              </tr>
+              <tr routerLink="/admin/usuarios/practicantes/1" class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-white">
+                <td class="px-6 py-2.5 whitespace-nowrap">nombre completo del practicante</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">disponible</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">10-11-2024</td>
+                <td class="px-6 py-2.5 whitespace-nowrap text-end">
+                  <div class="flex items-center justify-center gap-x-3">
+                    <a routerLink="1" title="Ver certificado" class="px-3 text-xs font-semibold capitalize btn-primary">Ver</a>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex items-center justify-between px-6 text-sm gap-x-10">
+          <p>150 resultados</p>
+
+          <!-- Paginador -->
+          <nav class="flex items-center gap-x-1">
+            <button
+              class="flex items-center justify-center p-2 font-semibold text-white rounded-md border-primary bg-primary size-7">1</button>
+            <button
+              class="flex items-center justify-center p-2 font-semibold text-gray-800 bg-white rounded-md size-7 hover:bg-gray-200">2</button>
+            <button
+              class="flex items-center justify-center p-2 font-semibold text-gray-800 bg-white rounded-md size-7 hover:bg-gray-200">3</button>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>

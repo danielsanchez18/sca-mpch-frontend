@@ -1,0 +1,108 @@
+<section class="space-y-10">
+  <div class="flex items-center gap-x-3">
+    <a routerLink="../.." class="p-1 text-gray-500 rounded-full hover:text-black hover:bg-gray-200">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-chevron-left size-5">
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+    </a>
+    <h2>Editar Supervisor</h2>
+  </div>
+
+  <form (ngSubmit)="updateSupervisor()" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
+    <div class="flex flex-col space-y-2">
+      <label for="" class="text-sm font-medium">Nombre</label>
+      <input type="text" class="input" placeholder="Ingrese los nombres del supervisor"
+        [(ngModel)]="supervisor.user.name" name="name" required>
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label for="lastname" class="text-sm font-medium">Apellidos</label>
+      <input type="text" class="input" placeholder="Ingrese los apellidos del supervisor"
+        [(ngModel)]="supervisor.user.lastname" name="lastname" required>
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label for="dni" class="text-sm font-medium">DNI</label>
+      <input type="text" class="input" placeholder="Ingrese el DNI del supervisor"
+        [(ngModel)]="supervisor.user.dni" name="dni" required>
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label for="birthdate" class="text-sm font-medium">Fecha de Nacimiento:</label>
+      <input type="date" class="input" placeholder="Ingrese su fecha de nacimiento"
+        [(ngModel)]="supervisor.user.birthdate" name="name" required>
+
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label for="" class="text-sm font-medium">Área:</label>
+      <select name="area" id="area" class="input" [(ngModel)]="supervisor.area.idArea" required>
+        <option value="" disabled selected>Selecciona un área</option>
+        <option *ngFor="let area of areas" [value]="area.idArea">{{ area.name }}</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label for="password" class="text-sm font-medium">Contraseña</label>
+      <input type="password" id="password" name="password" [(ngModel)]="supervisor.password" class="input"
+        placeholder="Ingrese su contraseña" required>
+    </div>
+
+    <div class="col-span-2" data-hs-file-upload='{
+      "url": "/upload",
+      "acceptedFiles": "image/*",
+      "maxFiles": 1,
+      "singleton": true
+    }'>
+      <template data-hs-file-upload-preview="">
+        <div class="size-16">
+          <img class="object-contain w-full border rounded-full" data-dz-thumbnail="">
+        </div>
+      </template>
+
+      <div class="flex items-center gap-3 justify-self-center sm:gap-5">
+        <div class="group" data-hs-file-upload-previews="" data-hs-file-upload-pseudo-trigger="">
+          <span
+            class="group-has-[div]:hidden flex shrink-0 justify-center items-center size-16 border-2 border-dotted border-gray-300 text-gray-400 cursor-pointer rounded-full hover:bg-gray-50 ">
+            <svg class="size-6 shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <path
+                d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z" />
+            </svg>
+          </span>
+        </div>
+
+        <div class="grow">
+          <div class="flex items-center gap-x-2">
+            <button type="button" class="flex items-center text-sm btn-primary gap-x-2" data-hs-file-upload-trigger="">
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" x2="12" y1="3" y2="15"></line>
+              </svg>
+              Subir foto
+            </button>
+            <button type="button"
+              class="px-4 py-2 text-sm font-medium border border-gray-300 rounded-md hover:bg-gray-100"
+              data-hs-file-upload-clear="">Quitar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="flex flex-col col-span-2 space-y-2">
+      <label for="status" class="text-sm font-medium">Estado:</label>
+      <select name="status" id="status" class="input" [(ngModel)]="supervisor.user.status" required>
+        <option [value]="true">Activo</option>
+        <option [value]="false">Inactivo</option>
+      </select>
+    </div>
+
+    <button type="submit" class="w-full btn-primary">Aplicar Cambios</button>
+    <a routerLink="../.." class="w-full btn-secondary">Cancelar</a>
+
+  </form>
+</section>

@@ -1,0 +1,68 @@
+<section class="w-full h-full px-20 py-10 space-y-10">
+
+  <h1>Panel de Administrador</h1>
+
+  <!-- <nav class="flex items-center w-full border-b">
+    <a routerLink="" class="navlink" routerLinkActive="navlink-active">General</a>
+    <a routerLink="a" class="navlink" routerLinkActive="navlink-active">Asistencias</a>
+    <a routerLink="a" class="navlink" routerLinkActive="navlink-active">Usuarios</a>
+    <a routerLink="a" class="navlink" routerLinkActive="navlink-active">Áreas</a>
+    <a routerLink="a" class="navlink" routerLinkActive="navlink-active">Universidades</a>
+  </nav> -->
+
+  <section class="space-y-5">
+    <h2>Resumen General</h2>
+
+    <div class="grid grid-cols-4 gap-x-5">
+
+      <article class="px-10 py-5 space-y-2 bg-blue-50 rounded-3xl">
+        <h3>Asistencias de hoy</h3>
+        <h1>{{ todaysAttendances }}</h1>
+      </article>
+
+      <article class="px-10 py-5 space-y-2 bg-blue-50 rounded-3xl">
+        <h3>Áreas</h3>
+        <h1>{{ areasCount }}</h1>
+      </article>
+
+      <article class="px-10 py-5 space-y-2 bg-blue-50 rounded-3xl">
+        <h3>Universidades</h3>
+        <h1>{{ universitiesCount }}</h1>
+      </article>
+
+      <article class="px-10 py-5 space-y-2 bg-blue-50 rounded-3xl">
+        <h3>Practicantes</h3>
+        <h1>{{ internsCount }}</h1>
+      </article>
+
+    </div>
+
+    <div class="grid grid-cols-2 gap-x-5">
+
+      <article class="px-10 py-5 space-y-2 bg-gray-100 rounded-3xl">
+        <h3>Asistencias de la semana</h3>
+        <div class="flex items-center gap-x-5">
+          <h1>{{ weeklyAttendances }}</h1>
+          <p class="text-sm font-semibold text-red-600">{{ weeklyAttendancePercentage | number: '1.0-0' }}%</p>
+        </div>
+        <div class="w-full h-52">
+          <img class="w-full h-full"
+          src="img/charts.png" alt="">
+        </div>
+      </article>
+
+      <article class="px-10 py-5 space-y-2 bg-gray-100 rounded-3xl">
+        <h3>Asistencias del mes</h3>
+        <div class="flex items-center gap-x-5">
+          <h1>{{ monthlyAttendances }}</h1>
+          <p class="text-sm font-semibold text-red-600">{{ monthlyAttendancePercentage | number: '1.0-0' }}%</p>
+        </div>
+        <div class="w-full h-52">
+          <img class="w-full h-full"
+          src="img/charts.png" alt="">
+        </div>
+      </article>
+
+    </div>
+  </section>
+</section>

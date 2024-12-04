@@ -1,0 +1,54 @@
+<section class="space-y-10">
+  <div class="flex items-center gap-x-3">
+    <a routerLink=".." class="p-1 text-gray-500 rounded-full hover:text-black hover:bg-gray-200">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-chevron-left size-5">
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+    </a>
+    <h2>Detalles del Administrador</h2>
+  </div>
+
+  <article class="grid grid-cols-[auto_1fr] px-10 gap-x-10">
+    <div class="bg-gray-100 rounded-full size-40">
+      <img *ngIf="admin.user.photo" [src]="admin.user.photo" alt="Foto de perfil" class="object-cover w-full h-full rounded-full">
+    </div>
+
+    <div class="space-y-2">
+      <div class="flex items-center gap-x-10">
+        <h1 class="">{{ admin.user.name }} {{ admin.user.lastname }}</h1>
+        <section class="flex items-center gap-x-2">
+          <div [ngClass]="{'bg-green-500': admin.user.status, 'bg-red-500': !admin.user.status}" class="rounded-full size-3"></div>
+          <p class="text-sm font-medium">{{ admin.user.status ? 'Activo' : 'Inactivo' }}</p>
+        </section>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">ID de Administrador:</p>
+        <p class="text-sm font-semibold">{{ admin.idAdmin }}</p>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">DNI:</p>
+        <p class="text-sm font-semibold">{{ admin.user.dni }}</p>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">Fecha de Nacimiento:</p>
+        <p class="text-sm font-semibold">{{ admin.user.birthdate | localDate }}</p>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">Fecha de Registro:</p>
+        <p class="text-sm font-semibold">{{ admin.user.createdAt | date: 'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">Fecha de Modificacion:</p>
+        <p class="text-sm font-semibold">{{ admin.user.updatedAt ? (admin.user.updatedAt | date: 'dd/MM/yyyy') : '-' }}</p>
+      </div>
+
+      <div class="flex items-center py-5 gap-x-2">
+        <a routerLink="editar" class="btn-primary">Editar</a>
+        <button (click)="deleteAdmin(admin.idAdmin)" type="button" class="btn-danger">Eliminar</button>
+      </div>
+    </div>
+  </article>
+
+</section>

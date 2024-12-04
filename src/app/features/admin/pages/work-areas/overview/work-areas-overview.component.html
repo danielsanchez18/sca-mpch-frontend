@@ -1,0 +1,68 @@
+<section class="w-full h-full px-20 py-10 space-y-10">
+
+  <div class="flex items-center gap-x-5">
+    <h1>Panel de Áreas Laborales</h1>
+    <div class="hs-tooltip [--placement:right] flex">
+      <button type="button"
+        class="inline-flex items-center justify-center text-gray-500 rounded-full hs-tooltip-toggle hover:bg-blue-50 hover:border-blue-200 hover:text-blue-600 focus:outline-none focus:bg-blue-50 focus:border-blue-200 focus:text-blue-600 ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="lucide lucide-circle-help size-6">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+          <path d="M12 17h.01" />
+        </svg>
+        <span
+          class="absolute z-10 invisible inline-block px-4 py-2 text-xs font-medium text-white transition-opacity bg-gray-900 rounded shadow-sm opacity-0 text-start max-w-80 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
+          role="tooltip">
+          Esta sección permite gestionar las relaciones entre área-universidad y establecer sus horas de certifiacion
+          personalizadas.
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="space-y-3 hs-accordion-group">
+
+    <article *ngFor="let area of areas; let i = index"
+      class="hs-accordion" [id]="'hs-basisc-heading-' + i">
+      <button
+        class="inline-flex items-center justify-between w-full px-6 py-2.5 bg-gray-100 text-sm font-semibold text-gray-800 hover:bg-gray-200 rounded-lg hs-accordion-toggle hs-accordion-active:text-white hs-accordion-active:rounded-b-none hs-accordion-active:bg-primary gap-x-3 text-start disabled:opacity-50 disabled:pointer-events-none"
+        [attr.aria-expanded]="false" [attr.aria-controls]="'hs-basic-collapse-' + i">
+        <div class="space-x-3 font-medium">
+          <span class="font-semibold uppercase">{{area.name}}</span>
+          <span>-</span><span>10 universidades asociadas</span>
+        </div>
+        <svg class="block hs-accordion-active:hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+        <svg class="hidden hs-accordion-active:block size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="m18 15-6-6-6 6"></path>
+        </svg>
+      </button>
+      <div [id]="'hs-basic-collapse-' + i"
+        class="hs-accordion-content hidden text-sm w-full overflow-hidden transition-[height] duration-200"
+        role="region" [attr.aria-labelledby]="'hs-basic-heading-' + i">
+        <div class="px-3 py-2.5 space-y-1 rounded-b-lg bg-gray-100">
+
+          <a *ngFor="let university of area.universities" routerLink="{{ university.idUniversity }}"
+            class="hover:bg-white grid grid-cols-3 font-medium text-gray-800 py-1.5 px-3 rounded-lg gap-x-3">
+            <span class="font-semibold uppercase">{{ university.university.name }}</span>
+            <span class="text-center">{{ university.practicantesCount }} practicantes</span>
+            <span class="text-end">{{ university.certifiedHours }} hrs. para certificación</span>
+          </a>
+
+          <div class="flex items-center justify-center py-3">
+            <a routerLink="agregar" class="text-xs font-bold text-primary hover:underline underline-offset-4">Agregar universidad</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+
+</section>

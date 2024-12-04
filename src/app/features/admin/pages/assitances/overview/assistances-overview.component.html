@@ -1,0 +1,23 @@
+<section class="w-full h-full px-20 py-10 space-y-10">
+
+  <div class="flex items-center gap-x-3">
+    <a routerLink=".." class="p-1 text-gray-500 rounded-full hover:text-black hover:bg-gray-200">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-chevron-left size-5">
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+    </a>
+    <h1>Reporte de Asistencias</h1>
+  </div>
+
+  <nav class="flex items-center w-full border-b">
+    <a routerLink="/admin/asistencias/overview" [routerLinkActiveOptions]="{exact:true}" class="navlink" routerLinkActive="navlink-active">Hoy</a>
+    <a routerLink="sem" class="navlink" routerLinkActive="navlink-active">Semanal</a>
+    <a routerLink="mes" class="navlink" routerLinkActive="navlink-active">Mensual</a>
+  </nav>
+
+  <div class="">
+    <router-outlet></router-outlet>
+  </div>
+</section>

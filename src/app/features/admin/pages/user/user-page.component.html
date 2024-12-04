@@ -1,0 +1,17 @@
+<section class="w-full h-full px-20 py-10 space-y-10">
+
+  <h1>Panel de Usuarios (170)</h1>
+
+  <nav class="flex items-center w-full border-b">
+    <a routerLink="/admin/usuarios" [routerLinkActiveOptions]="{exact:true}" class="navlink" routerLinkActive="navlink-active">General</a>
+    <a routerLink="administradores" class="navlink" routerLinkActive="navlink-active">Administradores</a>
+    <a routerLink="supervisores" class="navlink" routerLinkActive="navlink-active">Supervisor</a>
+    <!-- <a routerLink="seguridad" class="navlink" routerLinkActive="navlink-active">Seguridad</a> -->
+    <a routerLink="practicantes" class="navlink" routerLinkActive="navlink-active">Practicantes</a>
+  </nav>
+
+  <div class="">
+    <router-outlet></router-outlet>
+  </div>
+
+</section>

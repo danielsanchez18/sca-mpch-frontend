@@ -1,0 +1,84 @@
+<section class="w-full h-full px-20 py-10 space-y-10">
+
+  <div class="flex items-center gap-x-3">
+    <a routerLink=".." class="p-1 text-gray-500 rounded-full hover:text-black hover:bg-gray-200">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-chevron-left size-5">
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+    </a>
+    <h1>Registrar Universidad</h1>
+  </div>
+
+  <form (ngSubmit)="addUniversity()" #universityForm="ngForm" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
+    <div class="flex flex-col space-y-2">
+      <label for="name" class="text-sm font-medium">Nombre</label>
+      <input id="name" name="name" [(ngModel)]="university.name" type="text" class="input"
+        placeholder="Ingrese el nombre de la universidad">
+    </div>
+    <div class="flex flex-col space-y-2">
+      <label for="acronym" class="text-sm font-medium">Acrónimo</label>
+      <input id="acronym" name="acronym" [(ngModel)]="university.acronym" type="text" class="input"
+        placeholder="Ingrese un acrónimo">
+    </div>
+
+    <div class="col-span-2" data-hs-file-upload='{
+      "url": "/upload",
+      "acceptedFiles": "image/*",
+      "maxFiles": 1,
+      "singleton": true
+    }'>
+      <template data-hs-file-upload-preview="">
+        <div class="size-16">
+          <img class="object-contain w-full border rounded-full" data-dz-thumbnail="">
+        </div>
+      </template>
+
+      <div class="flex items-center gap-3 justify-self-center sm:gap-5">
+        <div class="group" data-hs-file-upload-previews="" data-hs-file-upload-pseudo-trigger="">
+          <span
+            class="group-has-[div]:hidden flex shrink-0 justify-center items-center size-16 border-2 border-dotted border-gray-300 text-gray-400 cursor-pointer rounded-full hover:bg-gray-50 ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="size-6 lucide lucide-graduation-cap">
+              <path
+                d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+              <path d="M22 10v6" />
+              <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+            </svg>
+          </span>
+        </div>
+
+        <div class="grow">
+          <div class="flex items-center gap-x-2">
+            <button type="button" class="flex items-center text-sm btn-primary gap-x-2" data-hs-file-upload-trigger="">
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" x2="12" y1="3" y2="15"></line>
+              </svg>
+              Subir foto
+            </button>
+            <button type="button"
+              class="px-4 py-2 text-sm font-medium border border-gray-300 rounded-md hover:bg-gray-100"
+              data-hs-file-upload-clear="">Quitar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col col-span-2 space-y-2">
+      <label for="status" class="text-sm font-medium">Estado:</label>
+      <select name="status" id="status" class="input" [(ngModel)]="university.status" required>
+        <option [value]="true">Activo</option>
+        <option [value]="false">Inactivo</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="!universityForm.valid" class="w-full btn-primary">Registrar</button>
+    <a routerLink=".." class="w-full btn-secondary">Cancelar</a>
+
+  </form>
+</section>
