@@ -8,22 +8,22 @@
 
     <a routerLink="overview" class="text-xs btn-primary h-fit">Ver Reporte</a>
 
-    <form action="" class="space-y-10 row-start-2 text-center w-full max-w-[35rem] mx-auto">
+    <div class="space-y-10 row-start-2 text-center w-full max-w-[35rem] mx-auto">
       <div class="space-y-2">
         <p class="text-sm font-semibold">Hora de Registro</p>
-        <h2 class="text-lg text-primary-dark">27/11/2024 - 12:18:23</h2>
+        <h2 class="text-lg text-primary-dark">{{ currentTime }}</h2>
       </div>
 
       <div class="flex flex-col space-y-2">
-        <label class="text-sm font-semibold">DNI del Practicante</label>
-        <input type="text" class="input" placeholder="Ingrese su DNI">
+        <label for="dni" class="text-sm font-semibold">DNI del Practicante</label>
+        <input type="text" class="input" placeholder="Ingrese su DNI" [(ngModel)]="dni" required name="dni" id="dni">
       </div>
 
       <div class="flex items-center gap-x-3">
-        <button class="w-full btn-primary">ENTRADA</button>
-        <button class="w-full btn-danger">SALIDA</button>
+        <button type="button" class="w-full btn-primary" (click)="registerCheckIn()">ENTRADA</button>
+        <button type="button" class="w-full btn-danger" (click)="registerCheckOut()">SALIDA</button>
       </div>
-    </form>
+    </div>
   </div>
 
 </section>

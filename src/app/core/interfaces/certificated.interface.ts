@@ -14,3 +14,8 @@ export interface PaginatedCertificateds {
   size: number;
   number: number; // Página actual
 }
+
+export interface CertificatedResponse {
+  data: PaginatedCertificateds;
+  message: string;
+}

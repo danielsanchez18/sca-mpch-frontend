@@ -10,63 +10,57 @@
     <h2>Editar Practicante</h2>
   </div>
 
-  <form action="" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
+  <form (ngSubmit)="updateIntern()" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
     <div class="flex flex-col space-y-2">
       <label for="" class="text-sm font-medium">Nombre</label>
-      <input type="text" class="input" placeholder="Ingrese los nombres del practicante">
+      <input type="text" class="input" placeholder="Ingrese los nombres del practicante" [(ngModel)]="intern.user.name"
+        name="name">
     </div>
 
     <div class="flex flex-col space-y-2">
       <label for="" class="text-sm font-medium">Apellidos</label>
-      <input type="text" class="input" placeholder="Ingrese los apellidos del practicante">
+      <input type="text" class="input" placeholder="Ingrese los apellidos del practicante" [(ngModel)]="intern.user.lastname"
+        name="lastname">
     </div>
 
     <div class="flex flex-col space-y-2">
       <label for="" class="text-sm font-medium">DNI</label>
-      <input type="text" class="input" placeholder="Ingrese el DNI del practicante">
+      <input type="text" class="input" placeholder="Ingrese el DNI del practicante" [(ngModel)]="intern.user.dni"
+        name="dni">
     </div>
 
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Fecha de Nacimiento:</label>
-      <input type="date" class="input" placeholder="Ingrese su fecha de nacimiento">
+      <label for="birthdate" class="text-sm font-medium">Fecha de Nacimiento:</label>
+      <input type="date" class="input" [(ngModel)]="intern.user.birthdate" id="birthdate" name="birthdate">
     </div>
 
     <div class="flex flex-col space-y-2">
       <label for="" class="text-sm font-medium">Área:</label>
-      <select name="" id="" class="input">
-        <option value="1">Programación</option>
-        <option value="0">Administración</option>
-        <option value="0">Finanzas</option>
-        <option value="0">Marketing</option>
-        <option value="0">Área Legal</option>
-        <option value="0">Logística</option>
+      <select [(ngModel)]="selectedArea" name="area" (change)="onAreaChange()" class="input">
+        <option *ngFor="let area of areas" [value]="area.idArea">{{ area.name }} - Vacantes: {{ area.nroVacancies }}</option>
       </select>
-      <p class="py-1 text-sm text-primary">Nro de vacantes disponibles: 4</p>
     </div>
 
     <div class="flex flex-col space-y-2">
       <label for="" class="text-sm font-medium">Universidad:</label>
-      <select name="" id="" class="input">
-        <option value="1">Universidad Nacional Pedro Ruiz Gallo</option>
-        <option value="0">Universidad Tecnológica del Perú</option>
-        <option value="0">Universidad Santo Toribio de Mogrovejo</option>
-        <option value="0">Universidad Señor de Sipán</option>
-        <option value="0">Universidad San Marcos</option>
-        <option value="0">Universidad Nacional de Trujillo</option>
+      <select [(ngModel)]="selectedUniversity" name="university" (change)="onUniversityChange()" class="input">
+        <option *ngFor="let university of universities" [value]="university.university.idUniversity">{{ university.university.name }}</option>
       </select>
-      <p class="py-1 text-sm text-primary">Mínimo de horas para certificación: 400 horas</p>
     </div>
 
+    <!-- Horas Trabajadas -->
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Horas Trabajadas:</label>
-      <input type="number" class="input" value="0" placeholder="Ingrese el número de horas trabajadas">
+      <label for="totalHours" class="text-sm font-medium">Horas Trabajadas</label>
+      <input type="number" class="input" [(ngModel)]="intern.totalHours" name="totalHours"
+        placeholder="Ingrese el número de horas trabajadas">
     </div>
 
+    <!-- Estado -->
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Estado:</label>
-      <select name="" id="" class="input">
-        <option value="1">Activo</option>
-        <option value="0">Inactivo</option>
+      <label for="status" class="text-sm font-medium">Estado:</label>
+      <select name="status" id="status" class="input" [(ngModel)]="intern.user.status" required>
+        <option [value]="true">Activo</option>
+        <option [value]="false">Inactivo</option>
       </select>
     </div>
 
@@ -113,7 +107,7 @@
       </div>
     </div>
 
-    <button class="w-full btn-primary">Aplicar Cambios</button>
+    <button type="submit" class="w-full btn-primary">Aplicar Cambios</button>
     <a routerLink="../.." class="w-full btn-secondary">Cancelar</a>
 
   </form>

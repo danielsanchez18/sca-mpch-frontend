@@ -62,7 +62,7 @@ export class AreasOverviewComponent implements OnInit {
 
   // Método para establecer la paginación
   setPagination(): void {
-    this.pages = Array.from({ length: this.areas.length }, (_, i) => i + 1);
+    this.pages = Array.from({ length: Math.ceil(this.totalAreas / this.size) }, (_, i) => i + 1);
   }
 
   // Método para eliminar un área

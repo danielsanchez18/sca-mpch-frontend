@@ -15,3 +15,8 @@ export interface PaginatedInterns {
   size: number;
   number: number; // Página actual
 }
+
+export interface InternResponse {
+  data: PaginatedInterns;
+  message: string;
+}

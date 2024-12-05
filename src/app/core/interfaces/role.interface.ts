@@ -11,3 +11,8 @@ export interface PaginatedRoles {
   size: number;
   number: number; // Página actual
 }
+
+export interface RoleResponse {
+  data: PaginatedRoles;
+  message: string;
+}

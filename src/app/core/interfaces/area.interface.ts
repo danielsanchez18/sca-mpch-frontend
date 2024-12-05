@@ -13,3 +13,8 @@ export interface PaginatedAreas {
   size: number;
   number: number; // Página actual
 }
+
+export interface AreaResponse {
+  data: PaginatedAreas;
+  message: string;
+}

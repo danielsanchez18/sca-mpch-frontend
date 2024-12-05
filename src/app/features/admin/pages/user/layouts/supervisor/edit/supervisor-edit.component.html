@@ -12,7 +12,7 @@
 
   <form (ngSubmit)="updateSupervisor()" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Nombre</label>
+      <label for="name" class="text-sm font-medium">Nombre</label>
       <input type="text" class="input" placeholder="Ingrese los nombres del supervisor"
         [(ngModel)]="supervisor.user.name" name="name" required>
     </div>
@@ -32,7 +32,7 @@
     <div class="flex flex-col space-y-2">
       <label for="birthdate" class="text-sm font-medium">Fecha de Nacimiento:</label>
       <input type="date" class="input" placeholder="Ingrese su fecha de nacimiento"
-        [(ngModel)]="supervisor.user.birthdate" name="name" required>
+        [(ngModel)]="supervisor.user.birthdate" name="birthdate" id="birthdate" required>
 
     </div>
 

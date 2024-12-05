@@ -10,63 +10,70 @@
     <h2>Registrar Practicante</h2>
   </div>
 
-  <form action="" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
+  <form (ngSubmit)="registerIntern()" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
     <div class="flex flex-col space-y-2">
       <label for="" class="text-sm font-medium">Nombre</label>
-      <input type="text" class="input" placeholder="Ingrese los nombres del practicante">
+      <input type="text" class="input" placeholder="Ingrese los nombres del practicante" [(ngModel)]="intern.user.name"
+        name="name">
     </div>
 
     <div class="flex flex-col space-y-2">
       <label for="" class="text-sm font-medium">Apellidos</label>
-      <input type="text" class="input" placeholder="Ingrese los apellidos del practicante">
+      <input type="text" class="input" placeholder="Ingrese los apellidos del practicante"
+        [(ngModel)]="intern.user.lastname" name="lastName">
     </div>
 
     <div class="flex flex-col space-y-2">
       <label for="" class="text-sm font-medium">DNI</label>
-      <input type="text" class="input" placeholder="Ingrese el DNI del practicante">
+      <input type="text" class="input" placeholder="Ingrese el DNI del practicante" [(ngModel)]="intern.user.dni"
+        name="dni">
     </div>
 
     <div class="flex flex-col space-y-2">
       <label for="" class="text-sm font-medium">Fecha de Nacimiento:</label>
-      <input type="date" class="input" placeholder="Ingrese su fecha de nacimiento">
+      <input type="date" class="input" placeholder="Ingrese su fecha de nacimiento" [(ngModel)]="intern.user.birthdate"
+        name="birthdate">
     </div>
 
     <div class="flex flex-col space-y-2">
       <label for="" class="text-sm font-medium">Área:</label>
-      <select name="" id="" class="input">
-        <option value="1">Programación</option>
-        <option value="0">Administración</option>
-        <option value="0">Finanzas</option>
-        <option value="0">Marketing</option>
-        <option value="0">Área Legal</option>
-        <option value="0">Logística</option>
+      <select [(ngModel)]="selectedArea" name="area" (change)="onAreaChange()" class="input">
+        <option *ngFor="let area of areas" [value]="area.idArea">{{ area.name }} - Vacantes: {{ area.nroVacancies }}
+        </option>
       </select>
-      <p class="py-1 text-sm text-primary">Nro de vacantes disponibles: 4</p>
+      <!-- <p class="py-1 text-sm text-primary">Nro de vacantes disponibles: 4</p> -->
     </div>
 
+    <!-- Universidad -->
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Universidad:</label>
-      <select name="" id="" class="input">
-        <option value="1">Universidad Nacional Pedro Ruiz Gallo</option>
-        <option value="0">Universidad Tecnológica del Perú</option>
-        <option value="0">Universidad Santo Toribio de Mogrovejo</option>
-        <option value="0">Universidad Señor de Sipán</option>
-        <option value="0">Universidad San Marcos</option>
-        <option value="0">Universidad Nacional de Trujillo</option>
+      <label for="university" class="text-sm font-medium">Universidad</label>
+      <select [(ngModel)]="selectedUniversity" name="university" (change)="onUniversityChange()" class="input"
+        [disabled]="!selectedArea || universities.length === 0">
+        <option *ngIf="!selectedArea || universities.length === 0" value="">
+          No hay universidades relacionadas
+        </option>
+        <option *ngFor="let university of universities" [value]="university.university.idUniversity">
+          {{ university.university.name }}
+        </option>
       </select>
-      <p class="py-1 text-sm text-primary">Mínimo de horas para certificación: 400 horas</p>
+      <p class="py-1 text-sm text-primary" *ngIf="selectedUniversity">
+        Mínimo de horas para certificación: {{ hoursCertified }} horas
+      </p>
     </div>
 
+    <!-- Horas Trabajadas -->
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Horas Trabajadas:</label>
-      <input type="number" class="input" value="0" placeholder="Ingrese el número de horas trabajadas">
+      <label for="totalHours" class="text-sm font-medium">Horas Trabajadas</label>
+      <input type="number" class="input" [(ngModel)]="intern.totalHours" name="totalHours"
+        placeholder="Ingrese el número de horas trabajadas">
     </div>
 
+    <!-- Estado -->
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Estado:</label>
-      <select name="" id="" class="input">
-        <option value="1">Activo</option>
-        <option value="0">Inactivo</option>
+      <label for="status" class="text-sm font-medium">Estado:</label>
+      <select name="status" id="status" class="input" [(ngModel)]="intern.user.status" required>
+        <option [value]="true">Activo</option>
+        <option [value]="false">Inactivo</option>
       </select>
     </div>
 
@@ -87,18 +94,17 @@
           <span
             class="group-has-[div]:hidden flex shrink-0 justify-center items-center size-16 border-2 border-dotted border-gray-300 text-gray-400 cursor-pointer rounded-full hover:bg-gray-50 ">
             <svg class="size-6 shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-              <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z" />
+              <path
+                d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z" />
             </svg>
           </span>
         </div>
 
         <div class="grow">
           <div class="flex items-center gap-x-2">
-            <button type="button" class="flex items-center text-sm btn-primary gap-x-2"
-              data-hs-file-upload-trigger="">
-              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
+            <button type="button" class="flex items-center text-sm btn-primary gap-x-2" data-hs-file-upload-trigger="">
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="17 8 12 3 7 8"></polyline>
                 <line x1="12" x2="12" y1="3" y2="15"></line>
@@ -113,7 +119,7 @@
       </div>
     </div>
 
-    <button class="w-full btn-primary">Registrar</button>
+    <button type="submit" class="w-full btn-primary">Registrar</button>
     <a routerLink=".." class="w-full btn-secondary">Cancelar</a>
 
   </form>

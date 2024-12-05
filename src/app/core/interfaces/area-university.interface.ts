@@ -16,7 +16,7 @@ export interface PaginatedAreaUniversities {
   number: number; // Página actual
 }
 
-export interface ResponseAreaUniversity {
+export interface AreaUniversityResponse {
   data: PaginatedAreaUniversities;
   message: string;
 }

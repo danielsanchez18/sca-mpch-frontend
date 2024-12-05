@@ -15,3 +15,8 @@ export interface PaginatedSupervisors {
   size: number;
   number: number; // Página actual
 }
+
+export interface SupervisorResponse {
+  data: PaginatedSupervisors;
+  message: string;
+}

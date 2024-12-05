@@ -15,3 +15,8 @@ export interface PaginatedAssistances {
   size: number;
   number: number; // Página actual
 }
+
+export interface AssistanceResponse {
+  data: PaginatedAssistances;
+  message: string;
+}

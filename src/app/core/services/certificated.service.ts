@@ -21,7 +21,11 @@ export class CertificatedService {
     return this.http.get<any>(`${this.apiUrl}/${dni}`);
   }
 
-  getAllCertificates(page: number = 0, size: number = 10): Observable<PaginatedCertificateds> {
-    return this.http.get<PaginatedCertificateds>(`${this.apiUrl}?page=${page}&size=${size}`);
+  getAllCertificates(page: number = 0, size: number = 10): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}?page=${page}&size=${size}`);
+  }
+
+  getEligibleInterns(page: number = 0, size: number = 10): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/eligible?page=${page}&size=${size}`);
   }
 }

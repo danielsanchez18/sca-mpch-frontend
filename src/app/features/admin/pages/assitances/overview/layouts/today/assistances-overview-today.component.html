@@ -4,17 +4,17 @@
     <div class="p-1.5 min-w-full inline-block align-middle space-y-5">
 
       <div class="flex items-center justify-start text-sm gap-x-3">
-        <label for="">Buscar por:</label>
-        <select name="" id="" class="px-2 text-xs input">
-          <option value="">Nombre</option>
-          <option value="">DNI</option>
-          <option value="">Area</option>
-          <option value="">Universidad</option>
-        </select>
-        <input type="text" class="text-xs input" placeholder="Buscar practicante">
-        <button type="button" class="text-xs btn-primary">Buscar</button>
+        <input type="text" [(ngModel)]="searchName" (input)="searchAssistancesByName()" class="text-xs input"
+          placeholder="Buscar practicante">
       </div>
 
+      @if (isLoading) {
+      <div class="flex items-center justify-center bg-gray-100 rounded-xl min-h-80">
+        <p>Cargando...</p>
+      </div>
+      }
+
+      @else {
       <div class="overflow-hidden rounded-md">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-primary">
@@ -27,90 +27,31 @@
             </tr>
           </thead>
           <tbody class="divide-y-2 divide-white">
-            <tr class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
-              <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">programacion</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">08:58:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">18:00:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
-            </tr>
-            <tr class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
-              <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">programacion</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">08:58:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">18:00:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
-            </tr>
-            <tr class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
-              <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">programacion</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">08:58:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">18:00:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
-            </tr>
-            <tr class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
-              <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">programacion</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">08:58:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">18:00:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
-            </tr>
-            <tr class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
-              <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">programacion</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">08:58:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">18:00:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
-            </tr>
-            <tr class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
-              <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">programacion</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">08:58:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">18:00:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
-            </tr>
-            <tr class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
-              <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">programacion</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">08:58:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">18:00:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
-            </tr>
-            <tr class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
-              <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">programacion</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">08:58:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">18:00:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
-            </tr>
-            <tr class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
-              <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">programacion</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">08:58:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">18:00:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
-            </tr>
-            <tr class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
-              <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">programacion</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">08:58:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">18:00:00</td>
-              <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
+            <tr *ngFor="let assistance of assistances" class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
+              <td class="px-6 py-2.5 whitespace-nowrap">{{ assistance.intern.user.name }} {{ assistance.intern.user.lastname }}</td>
+              <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.intern.areaUniversity.area.name }}
+              </td>
+              <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.checkIn | TimeFormat }}</td>
+              <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.checkOut | TimeFormat }} </td>
+              <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.hoursWorked | DecimalHours }}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <div class="flex items-center justify-between px-6 text-sm gap-x-10">
-        <p>150 resultados</p>
+        <p>{{ totalAssistances }} resultados</p>
 
         <!-- Paginador -->
         <nav class="flex items-center gap-x-1">
-          <button class="flex items-center justify-center p-2 font-semibold text-white rounded-md border-primary bg-primary size-7">1</button>
-          <button class="flex items-center justify-center p-2 font-semibold text-gray-800 bg-white rounded-md size-7 hover:bg-gray-200">2</button>
-          <button class="flex items-center justify-center p-2 font-semibold text-gray-800 bg-white rounded-md size-7 hover:bg-gray-200">3</button>
+          <button *ngFor="let page of pages" (click)="goToPage(page)"
+            class="px-3 py-1 text-sm rounded-md hover:bg-gray-200"
+            [ngClass]="{ 'bg-primary text-white font-semibold pointer-events-none': page === currentPage }">
+            {{ page }}
+          </button>
         </nav>
       </div>
+      }
     </div>
   </div>
 

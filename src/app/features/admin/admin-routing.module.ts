@@ -57,8 +57,11 @@ const routes: Routes = [
         path: 'usuarios',
         component: AdminUserPageComponent,
         children: [
+          // {
+          //   path: '', component: UserGeneralComponent
+          // },
           {
-            path: '', component: UserGeneralComponent
+            path: '', redirectTo: 'administradores', pathMatch: 'full'
           },
           {
             path: 'administradores', component: AdminOverviewComponent,
@@ -101,10 +104,10 @@ const routes: Routes = [
             path: 'practicantes', component: InternOverviewComponent,
           },
           {
-            path: 'practicantes/1', component: InternDetailsComponent,
+            path: 'practicantes/agregar', component: InternAddComponent,
           },
           {
-            path: 'practicantes/agregar', component: InternAddComponent,
+            path: 'practicantes/:id', component: InternDetailsComponent,
           },
           {
             path: 'practicantes/:id/editar', component: InternEditComponent,
@@ -166,7 +169,7 @@ const routes: Routes = [
         component: WorkAreasOverviewComponent
       },
       {
-        path: 'areas-laborales/agregar',
+        path: 'areas-laborales/agregar/:id',
         component: WorkAreasAddComponent
       },
       {

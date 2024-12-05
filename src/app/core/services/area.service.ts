@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Area, PaginatedAreas } from '../interfaces/area.interface';
+import { Area, AreaResponse, PaginatedAreas } from '../interfaces/area.interface';
 import { HttpClient } from '@angular/common/http';
 import { URL } from '../utils/api';
 
@@ -21,12 +21,12 @@ export class AreaService {
     return this.http.get<any>(`${this.apiUrl}/id/${id}`);
   }
 
-  getAllAreas(page: number = 0, size: number = 10): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}?page=${page}&size=${size}`);
+  getAllAreas(page: number = 0, size: number = 10): Observable<AreaResponse> {
+    return this.http.get<AreaResponse>(`${this.apiUrl}?page=${page}&size=${size}`);
   }
 
-  searchAreaByName(name: string, page: number = 0, size: number = 10): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/name/${name}?page=${page}&size=${size}`);
+  searchAreaByName(name: string, page: number = 0, size: number = 10): Observable<AreaResponse> {
+    return this.http.get<AreaResponse>(`${this.apiUrl}/name/${name}?page=${page}&size=${size}`);
   }
 
   getTotalAreas(): Observable<number> {

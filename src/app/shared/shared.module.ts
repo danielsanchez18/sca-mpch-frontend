@@ -4,12 +4,16 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { LocalDatePipe } from './pipes/local-date.pipe';
+import { TimeFormatPipe } from './pipes/time-format.pipe';
+import { DecimalHoursPipe } from './pipes/decimal-hours.pipe';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     SidebarComponent,
-    LocalDatePipe
+    LocalDatePipe,
+    TimeFormatPipe,
+    DecimalHoursPipe
   ],
   imports: [
     CommonModule,
@@ -18,7 +22,9 @@ import { LocalDatePipe } from './pipes/local-date.pipe';
   exports: [
     NavbarComponent,
     SidebarComponent,
-    LocalDatePipe
+    LocalDatePipe,
+    TimeFormatPipe,
+    DecimalHoursPipe
   ]
 })
 export class SharedModule { }

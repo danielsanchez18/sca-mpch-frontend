@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { URL } from '../utils/api';
 import { HttpClient } from '@angular/common/http';
-import { AreaUniversity, PaginatedAreaUniversities } from '../interfaces/area-university.interface';
+import { AreaUniversity, AreaUniversityResponse } from '../interfaces/area-university.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class AreaUniversityService {
 
   constructor(private http: HttpClient) { }
 
-  addAreaUniversity(areaUniversity: AreaUniversity): Observable<any> {
+  addAreaUniversity(areaUniversity: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/add`, areaUniversity);
   }
 
@@ -21,12 +21,12 @@ export class AreaUniversityService {
     return this.http.get<any>(`${this.apiUrl}/id/${id}`);
   }
 
-  getAllAreaUniversities(page: number = 0, size: number = 10): Observable<PaginatedAreaUniversities> {
-    return this.http.get<PaginatedAreaUniversities>(`${this.apiUrl}?page=${page}&size=${size}`);
+  getAllAreaUniversities(page: number = 0, size: number = 10): Observable<AreaUniversityResponse> {
+    return this.http.get<AreaUniversityResponse>(`${this.apiUrl}?page=${page}&size=${size}`);
   }
 
-  searchByAreaOrUniversity(areaName: string, universityName: string, page: number = 0, size: number = 10): Observable<PaginatedAreaUniversities> {
-    return this.http.get<PaginatedAreaUniversities>(`${this.apiUrl}/search/${areaName}/${universityName}?page=${page}&size=${size}`);
+  searchByAreaOrUniversity(areaName: string, universityName: string, page: number = 0, size: number = 10): Observable<AreaUniversityResponse> {
+    return this.http.get<AreaUniversityResponse>(`${this.apiUrl}/search/${areaName}/${universityName}?page=${page}&size=${size}`);
   }
 
   deleteAreaUniversity(id: string): Observable<any> {
