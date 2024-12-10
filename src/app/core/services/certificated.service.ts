@@ -28,4 +28,8 @@ export class CertificatedService {
   getEligibleInterns(page: number = 0, size: number = 10): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/eligible?page=${page}&size=${size}`);
   }
+
+  getCertificatedById(idCertificated: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/id/${idCertificated}`);
+  }
 }

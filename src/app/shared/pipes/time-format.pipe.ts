@@ -6,7 +6,7 @@ import { Pipe, type PipeTransform } from '@angular/core';
 export class TimeFormatPipe implements PipeTransform {
 
   transform(value: string): string {
-    console.log('Original value:', value);
+    // console.log('Original value:', value);
 
     // Si el valor no existe, devolver vacío
     if (!value) return '';
@@ -15,7 +15,7 @@ export class TimeFormatPipe implements PipeTransform {
     const cleanedValue = value.split('.')[0]; // Esto elimina los milisegundos
     const date = new Date(cleanedValue);  // Crear un objeto Date
 
-    console.log('Parsed date:', date);
+    // console.log('Parsed date:', date);
 
     // Verificar si la fecha es válida
     if (isNaN(date.getTime())) {

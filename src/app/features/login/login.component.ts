@@ -18,7 +18,7 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   // Manejo del formulario de login
   onSubmit(): void {
@@ -28,24 +28,31 @@ export class LoginComponent {
     };
 
     this.authService.login(credentials).subscribe({
-      next: (response) => {
-        // Guardamos el token
-        this.authService.saveToken(response.token);
+      next: () => {
+        // Obtener el rol guardado en el localStorage
+        const userRole = this.authService.getUserRole();
+        console.log(userRole);
 
         // Mostrar SweetAlert de éxito
         Swal.fire({
           icon: 'success',
           title: '¡Bienvenido!',
-          text: 'Has iniciado sesión correctamente.',
+          text: `Has iniciado sesión correctamente como ${userRole}.`,
           confirmButtonText: 'Aceptar',
         });
 
-        // Redirigimos al usuario a la página principal o al destino que prefieras
-        this.router.navigate(['/admin']);
+        // Redirigir según el rol
+        if (userRole === 'administrador') {
+          this.router.navigate(['/admin']);
+        } else if (userRole === 'supervisor') {
+          this.router.navigate(['/supervisor']);
+        } else if (userRole === 'seguridad') {
+          this.router.navigate(['/seguridad']);
+        } else {
+          this.router.navigate(['/']); // Ruta por defecto
+        }
       },
       error: (err) => {
-        // this.errorMessage = 'Credenciales incorrectas. Intente nuevamente.';
-
         // Mostrar SweetAlert personalizado en caso de error
         Swal.fire({
           icon: 'error',
@@ -53,7 +60,6 @@ export class LoginComponent {
           text: 'Las credenciales proporcionadas son incorrectas. Intente nuevamente.',
           confirmButtonText: 'Reintentar',
         });
-
       }
     });
   }

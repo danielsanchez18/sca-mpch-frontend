@@ -51,7 +51,7 @@ export class AdminDetailsComponent implements OnInit {
             this.router.navigate(['/admin/usuarios/administradores']);  // Redirigir a la lista de administradores
           },
           (error: any) => {
-            console.error('Error al eliminar el administrador', error);
+            //console.error('Error al eliminar el administrador', error);
             Swal.fire('Error', 'No se pudo eliminar el administrador.', 'error');
           }
         );

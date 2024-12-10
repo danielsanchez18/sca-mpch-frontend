@@ -1,0 +1,65 @@
+<section class="flex flex-col space-y-10">
+
+  <div class="-m-1.5 overflow-x-auto">
+    <div class="p-1.5 min-w-full inline-block align-middle space-y-5">
+
+      <div class="flex items-center justify-start text-sm gap-x-3">
+        <input type="text" [(ngModel)]="searchName" (input)="searchAssistancesByName()" class="text-xs input"
+          placeholder="Buscar practicante">
+      </div>
+
+      @if (isLoading) {
+      <div class="flex items-center justify-center bg-gray-100 rounded-xl min-h-80">
+        <p>Cargando...</p>
+      </div>
+      }
+
+      @else {
+      <div class="overflow-hidden rounded-md">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-primary">
+            <tr class="text-xs text-white uppercase">
+              <th scope="col" class="px-6 py-3 font-medium text-start">Nombre</th>
+              <th scope="col" class="px-6 py-3 font-medium text-center">area</th>
+              <th scope="col" class="px-6 py-3 font-medium text-center">entrada</th>
+              <th scope="col" class="px-6 py-3 font-medium text-center">salida</th>
+              <th scope="col" class="px-6 py-3 font-medium text-center">horas </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y-2 divide-white">
+            <tr *ngFor="let assistance of assistances" class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
+              <td class="px-6 py-2.5 whitespace-nowrap">{{ assistance.intern.user.name }} {{ assistance.intern.user.lastname }}</td>
+              <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.intern.areaUniversity.area.name }}
+              </td>
+              <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.checkIn | TimeFormat }}</td>
+              <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.checkOut | TimeFormat }} </td>
+              <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.hoursWorked | DecimalHours }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex items-center justify-between px-6 text-sm gap-x-10">
+        <p>{{ totalAssistances }} resultados</p>
+
+        <!-- Paginador -->
+        <nav class="flex items-center gap-x-1">
+          <button *ngFor="let page of pages" (click)="goToPage(page)"
+            class="px-3 py-1 text-sm rounded-md hover:bg-gray-200"
+            [ngClass]="{ 'bg-primary text-white font-semibold pointer-events-none': page === currentPage }">
+            {{ page }}
+          </button>
+        </nav>
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="space-y-5">
+    <h2>Asistencias de Hoy</h2>
+
+    <section class="p-4 border rounded-lg">
+
+    </section>
+  </div>
+</section>

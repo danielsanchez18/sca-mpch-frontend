@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Supervisor } from '../../../../../../../core/interfaces/supervisor.interface';
 import { SupervisorService } from '../../../../../../../core/services/supervisor.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'supervisor-overview',
@@ -19,7 +20,10 @@ export class SupervisorOverviewComponent implements OnInit {
 
   isLoading: boolean = true;
 
-  constructor(private supervisorService: SupervisorService) { }
+  constructor(
+    private supervisorService: SupervisorService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.getSupervisors(); // Obtener supervisores al iniciar el componente
@@ -77,6 +81,7 @@ export class SupervisorOverviewComponent implements OnInit {
           () => {
             Swal.fire('Eliminado!', 'El administrador ha sido eliminado.', 'success');
             this.getSupervisors(); // Refrescar la lista después de eliminar
+            this.router.navigate(['/admin/usuarios/supervisores']);
           },
           error => {
             console.error('Error al eliminar el administrador', error);

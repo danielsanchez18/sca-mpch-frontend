@@ -2,7 +2,8 @@
 
   <div class="flex items-center justify-between gap-x-3">
     <h1>Panel de Certificaciones</h1>
-    <input type="text" class="text-xs input" [(ngModel)]="searchInterns" placeholder="Buscar practicante">
+    <input type="text" class="text-xs input" [(ngModel)]="searchInterns" (ngModelChange)="search()"
+      placeholder="Buscar practicante">
   </div>
 
   <section class="flex flex-col space-y-10">
@@ -10,60 +11,67 @@
     <div class="-m-1.5 overflow-x-auto">
       <div class="p-1.5 min-w-full inline-block align-middle space-y-5">
 
-        @if (isLoading) {
-        <div class="flex items-center justify-center bg-gray-100 rounded-xl min-h-80">
+        <div *ngIf="isLoading" class="flex items-center justify-center bg-gray-100 rounded-xl min-h-80">
           <p>Cargando...</p>
         </div>
-        }
 
-        @else {
-
-        <div class="overflow-hidden rounded-md">
+        <div *ngIf="!isLoading" class="overflow-hidden rounded-md">
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-primary">
               <tr class="text-xs text-white uppercase">
-                <th scope="col" class="px-6 py-3 font-medium text-start">practicante</th>
-                <th scope="col" class="px-6 py-3 font-medium text-center">estado</th>
-                <th scope="col" class="px-6 py-3 font-medium text-center">fecha de creacion</th>
-                <th scope="col" class="px-6 py-3 font-medium text-center">accion</th>
+                <th scope="col" class="px-6 py-3 font-medium text-start">Practicante</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">Estado</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">Fecha de creación</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">Acción</th>
               </tr>
             </thead>
             <tbody class="divide-y-2 divide-white">
-              <tr *ngFor="let certification of certifications"
-                routerLink="/admin/usuarios/practicantes/{{certification.idIntern}}"
+              <tr *ngFor="let intern of interns"
                 class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-white">
-                <td class="px-6 py-2.5 whitespace-nowrap">{{ certification.user.name }} {{ certification.user.lastname
-                  }}</td>
-                <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ certification.user.status ? 'Activo' : 'Inactivo' }}</td>
-                <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ certification.user.createdAt | localDate }}
+                <td class="px-6 py-2.5 whitespace-nowrap">
+                  {{ intern.user.name }} {{ intern.user.lastname }}
+                </td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">
+                  {{ intern.user.status ? 'Activo' : 'Inactivo' }}
+                </td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">
+                  {{ intern.user.createdAt | date:'dd/MM/yyyy' }}
                 </td>
                 <td class="px-6 py-2.5 whitespace-nowrap text-end">
                   <div class="flex items-center justify-center gap-x-3">
-                    <button *ngIf="!certification" (click)="generateCertificate(certification.user.dni)"
-                      type="button" title="Generar certificado"
-                      class="px-3 text-xs font-semibold btn-danger">Generar</button>
-                    <a *ngIf="certification" routerLink="/admin/certificados/{{certification.id}}"
-                      title="Ver certificado" class="px-3 text-xs font-semibold capitalize btn-primary">Ver</a>
+                    <!-- Verifica si el practicante tiene un certificado y muestra el enlace -->
+                    <a *ngIf="certificationsMap.get(intern.user.dni)"
+                      [routerLink]="'/admin/certificados/' + (certificationsMap.get(intern.user.dni)?.idCertificated || '')"
+                      title="Ver certificado" class="px-3 text-xs font-semibold capitalize btn-primary">
+                      Ver
+                    </a>
+
+                    <!-- Muestra el botón de Generar certificado solo si no tiene certificado -->
+                    <button *ngIf="!certificationsMap.get(intern.user.dni)"
+                      (click)="generateCertificate(intern.user.dni)"
+                      class="px-3 text-xs font-semibold capitalize btn-danger">
+                      Generar
+                    </button>
                   </div>
                 </td>
+
               </tr>
             </tbody>
           </table>
         </div>
 
         <div class="flex items-center justify-between px-6 text-sm gap-x-10">
-          <p>{{ totalCertifications }} resultados</p>
+          <p>{{ totalInterns }} resultados</p>
 
           <!-- Paginador -->
           <nav class="flex items-center gap-x-1">
             <button *ngFor="let page of pages" (click)="goToPage(page)"
               class="px-3 py-1 text-sm rounded-md hover:bg-gray-200"
-              [ngClass]="{ 'bg-primary text-white font-semibold pointer-events-none': page === currentPage }">
+              [ngClass]="{ 'bg-primary text-white font-semibold pointer-events-none': page === currentPage + 1 }">
               {{ page }}
             </button>
           </nav>
         </div>
-        }
       </div>
     </div>
   </section>

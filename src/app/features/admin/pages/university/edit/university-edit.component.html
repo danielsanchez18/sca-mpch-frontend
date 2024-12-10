@@ -11,16 +11,31 @@
     <h1>Editar Universidad</h1>
   </div>
 
-  <form action="" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
+  <form (ngSubmit)="updateUniversity()" #universityForm="ngForm" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Nombre</label>
-      <input type="text" class="input" placeholder="Ingrese el nombre de la universidad">
+      <label for="name" class="text-sm font-medium">Nombre</label>
+      <input id="name" name="name" [(ngModel)]="university.name" #name="ngModel" required minlength="3" maxlength="50"
+        type="text" class="input" placeholder="Ingrese el nombre de la universidad">
+      <p class="text-sm text-red-600" *ngIf="name.invalid && name.touched">
+        <!-- Mensajes de error -->
+        <span *ngIf="name.errors?.['required']">El nombre es obligatorio.</span>
+        <span *ngIf="name.errors?.['minlength']">Debe tener al menos 3 caracteres.</span>
+        <span *ngIf="name.errors?.['maxlength']">No puede exceder los 50 caracteres.</span>
+      </p>
     </div>
 
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Acrónimo</label>
-      <input type="number" class="input" placeholder="Ingrese un acrónimo">
+      <label for="acronym" class="text-sm font-medium">Acrónimo</label>
+      <input id="acronym" name="acronym" [(ngModel)]="university.acronym" #acronym="ngModel" required minlength="2" maxlength="10"
+        type="text" class="input" placeholder="Ingrese un acrónimo">
+      <p class="text-sm text-red-600" *ngIf="acronym.invalid && acronym.touched">
+        <!-- Mensajes de error -->
+        <span *ngIf="acronym.errors?.['required']">El acrónimo es obligatorio.</span>
+        <span *ngIf="acronym.errors?.['minlength']">Debe tener al menos 2 caracteres.</span>
+        <span *ngIf="acronym.errors?.['maxlength']">No puede exceder los 10 caracteres.</span>
+      </p>
     </div>
+
 
     <div class="col-span-2" data-hs-file-upload='{
       "url": "/upload",
@@ -69,14 +84,14 @@
     </div>
 
     <div class="flex flex-col col-span-2 space-y-2">
-      <label for="" class="text-sm font-medium">Estado:</label>
-      <select name="" id="" class="input">
-        <option value="1">Activo</option>
-        <option value="0">Inactivo</option>
+      <label for="status" class="text-sm font-medium">Estado:</label>
+      <select name="status" id="status" class="input" [(ngModel)]="university.status" required>
+        <option [value]="true">Activo</option>
+        <option [value]="false">Inactivo</option>
       </select>
     </div>
 
-    <button class="w-full btn-primary">Aplicar Cambios</button>
+    <button type="submit" [disabled]="!universityForm.valid" class="w-full btn-primary disabled:opacity-75 disabled:pointer-events-none">Aplicar Cambios</button>
     <a routerLink="../.." class="w-full btn-secondary">Cancelar</a>
 
   </form>

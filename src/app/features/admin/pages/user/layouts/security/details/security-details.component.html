@@ -11,36 +11,44 @@
   </div>
 
   <article class="grid grid-cols-[auto_1fr] px-10 gap-x-10">
-    <div class="bg-gray-100 rounded-full size-40"></div>
+    <div class="bg-gray-100 rounded-full size-40">
+
+      <img src="img/user.webp" alt="" class="object-cover p-2 rounded-full">
+
+    </div>
 
     <div class="space-y-2">
       <div class="flex items-center gap-x-10">
-        <h1 class="">Nombre completo del Seguridad</h1>
+        <h1 class="">{{ security.user.name }} {{ security.user.lastname }}</h1>
         <section class="flex items-center gap-x-2">
-          <div class="bg-green-500 rounded-full size-3"></div>
-          <p class="text-sm font-medium">Activo</p>
+          <div [ngClass]="{'bg-green-500': security.user.status, 'bg-red-500': !security.user.status}" class="rounded-full size-3"></div>
+          <p class="text-sm font-medium">{{ security.user.status ? 'Activo' : 'Inactivo' }}</p>
         </section>
       </div>
       <div class="flex items-center gap-x-3">
+        <p class="text-sm">ID de Seguridad:</p>
+        <p class="text-sm font-semibold">{{ security.idSecurity }}</p>
+      </div>
+      <div class="flex items-center gap-x-3">
         <p class="text-sm">DNI:</p>
-        <p class="text-sm font-semibold">73323509</p>
+        <p class="text-sm font-semibold">{{ security.user.dni }}</p>
       </div>
       <div class="flex items-center gap-x-3">
         <p class="text-sm">Fecha de Nacimiento:</p>
-        <p class="text-sm font-semibold">18/06/2004</p>
+        <p class="text-sm font-semibold">{{ security.user.birthdate | localDate }}</p>
       </div>
       <div class="flex items-center gap-x-3">
         <p class="text-sm">Fecha de Registro:</p>
-        <p class="text-sm font-semibold">27/11/2024</p>
+        <p class="text-sm font-semibold">{{ security.user.createdAt | date: 'dd/MM/yyyy' }}</p>
       </div>
       <div class="flex items-center gap-x-3">
         <p class="text-sm">Fecha de Modificacion:</p>
-        <p class="text-sm font-semibold">-</p>
+        <p class="text-sm font-semibold">{{ security.user.updatedAt ? (security.user.updatedAt | date: 'dd/MM/yyyy') : '-' }}</p>
       </div>
 
       <div class="flex items-center py-5 gap-x-2">
         <a routerLink="editar" class="btn-primary">Editar</a>
-        <button type="button" class="btn-danger">Eliminar</button>
+        <button (click)="deleteSecurity(security.idSecurity)" type="button" class="btn-danger">Eliminar</button>
       </div>
     </div>
   </article>

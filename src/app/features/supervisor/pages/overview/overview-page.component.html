@@ -1,0 +1,43 @@
+<section class="w-full h-full px-20 py-10 space-y-10">
+
+  <h1>Panel de Supervisor</h1>
+
+  <section class="space-y-5">
+
+    <h2>Resumen General</h2>
+
+    <div class="grid grid-cols-2 gap-5">
+
+      <article class="px-10 py-5 space-y-2 bg-blue-50 rounded-3xl">
+        <h3>Área</h3>
+        <h1 class="capitalize">Programación</h1>
+      </article>
+
+
+      <article class="row-span-3 px-10 py-5 space-y-2 bg-gray-100 rounded-3xl">
+        <h3>Practicantes / Universidad</h3>
+        <div class="flex items-center gap-x-5">
+          <h1>20 / 2</h1>
+          <!-- <p class="text-sm font-semibold text-red-600">{{ monthlyAttendancePercentage | number: '1.0-0' }}%</p> -->
+        </div>
+        <div class="w-full h-52">
+          <img class="w-full h-full"
+          src="img/charts.png" alt="">
+        </div>
+      </article>
+
+      <article class="px-10 py-5 space-y-2 bg-blue-50 rounded-3xl">
+        <h3>Universidades asociadas</h3>
+        <h1 class="capitalize">13</h1>
+      </article>
+
+
+      <article class="px-10 py-5 space-y-2 bg-blue-50 rounded-3xl">
+        <h3>Practicantes</h3>
+        <h1>{{ internsCount }}</h1>
+      </article>
+
+
+    </div>
+  </section>
+</section>

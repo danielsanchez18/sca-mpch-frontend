@@ -36,7 +36,7 @@
                 class="text-sm font-medium text-gray-800 uppercase bg-gray-100 hover:bg-white hover:cursor-pointer">
                 <td class="px-6 py-2.5 whitespace-nowrap">{{ university.name }}</td>
                 <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ university.acronym }}</td>
-                <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ university['internCount'] }}</td>
                 <td class="px-6 py-2.5 whitespace-nowrap text-end">
                   <div class="flex items-center justify-center gap-x-3">
                     <a routerLink="{{ university.idUniversity }}/editar" title="Editar"

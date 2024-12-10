@@ -36,7 +36,7 @@
                 class="text-sm font-medium text-gray-800 uppercase bg-gray-100 hover:bg-white hover:cursor-pointer">
                 <td class="px-6 py-2.5 whitespace-nowrap">{{ area.name }}</td>
                 <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ area.nroVacancies }}</td>
-                <td class="px-6 py-2.5 text-center whitespace-nowrap">10</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ area.universitiesCount || 0 }}</td>
                 <td class="px-6 py-2.5 whitespace-nowrap text-end">
                   <div class="flex items-center justify-center gap-x-3">
                     <a routerLink="{{ area.idArea }}/editar" title="Editar"

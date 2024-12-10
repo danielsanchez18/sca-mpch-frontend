@@ -1,4 +1,4 @@
-<section class="space-y-10">
+<section class="px-20 py-10 space-y-10 size-full">
   <div class="flex items-center gap-x-3">
     <a routerLink=".." class="p-1 text-gray-500 rounded-full hover:text-black hover:bg-gray-200">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -7,26 +7,40 @@
         <path d="m15 18-6-6 6-6" />
       </svg>
     </a>
-    <h2>Registrar Practicante</h2>
+    <h1>Registrar Practicante</h1>
   </div>
 
-  <form (ngSubmit)="registerIntern()" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
+  <form (ngSubmit)="registerIntern()" #registerForm="ngForm" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7" novalidate>
+    <!-- Nombre -->
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Nombre</label>
-      <input type="text" class="input" placeholder="Ingrese los nombres del practicante" [(ngModel)]="intern.user.name"
-        name="name">
+      <label for="name" class="text-sm font-medium">Nombre</label>
+      <input type="text" class="input" id="name" placeholder="Ingrese los nombres del practicante"
+        [(ngModel)]="intern.user.name" name="name" #name="ngModel" required minlength="3" />
+      <p *ngIf="name.invalid && (name.dirty || name.touched)" class="text-sm text-red-600">
+        <span *ngIf="name.errors?.['required']">El nombre es obligatorio.</span>
+        <span *ngIf="name.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</span>
+      </p>
     </div>
 
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Apellidos</label>
-      <input type="text" class="input" placeholder="Ingrese los apellidos del practicante"
-        [(ngModel)]="intern.user.lastname" name="lastName">
+      <label for="lastname" class="text-sm font-medium">Apellidos</label>
+      <input type="text" class="input" id="lastname" placeholder="Ingrese los apellidos del practicante"
+        [(ngModel)]="intern.user.lastname" name="lastName" #lastname="ngModel" required />
+      <p *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="text-sm text-red-600">
+        <span *ngIf="lastname.errors?.['required']">Los apellidos son obligatorios.</span>
+      </p>
     </div>
 
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">DNI</label>
-      <input type="text" class="input" placeholder="Ingrese el DNI del practicante" [(ngModel)]="intern.user.dni"
-        name="dni">
+      <label for="dni" class="text-sm font-medium">DNI</label>
+      <input type="text" class="input" id="dni" placeholder="Ingrese el DNI del practicante"
+        [(ngModel)]="intern.user.dni" name="dni" #dni="ngModel" required minlength="8" maxlength="8" pattern="[0-9]*" />
+      <p *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="text-sm text-red-600">
+        <span *ngIf="dni.errors?.['required']">El DNI es obligatorio.</span>
+        <span *ngIf="dni.errors?.['minlength']">El DNI debe tener 8 dígitos.</span>
+        <span *ngIf="dni.errors?.['maxlength']">El DNI debe tener 8 dígitos.</span>
+        <span *ngIf="dni.errors?.['pattern']">El DNI debe contener solo números.</span>
+      </p>
     </div>
 
     <div class="flex flex-col space-y-2">
@@ -64,8 +78,12 @@
     <!-- Horas Trabajadas -->
     <div class="flex flex-col space-y-2">
       <label for="totalHours" class="text-sm font-medium">Horas Trabajadas</label>
-      <input type="number" class="input" [(ngModel)]="intern.totalHours" name="totalHours"
-        placeholder="Ingrese el número de horas trabajadas">
+      <input type="number" class="input" id="totalHours" [(ngModel)]="intern.totalHours" name="totalHours"
+        #totalHours="ngModel" required min="1" />
+      <p *ngIf="totalHours.invalid && (totalHours.dirty || totalHours.touched)" class="text-sm text-red-600">
+        <span *ngIf="totalHours.errors?.['required']">El número de horas trabajadas es obligatorio.</span>
+        <span *ngIf="totalHours.errors?.['min']">Debe ingresar al menos 1 hora trabajada.</span>
+      </p>
     </div>
 
     <!-- Estado -->
@@ -119,7 +137,7 @@
       </div>
     </div>
 
-    <button type="submit" class="w-full btn-primary">Registrar</button>
+    <button type="submit" class="w-full btn-primary disabled:opacity-75 disabled:pointer-events-none" [disabled]="registerForm.invalid">Registrar</button>
     <a routerLink=".." class="w-full btn-secondary">Cancelar</a>
 
   </form>

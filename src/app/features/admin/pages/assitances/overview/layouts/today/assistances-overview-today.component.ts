@@ -1,77 +1,79 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AssistanceService } from '../../../../../../../core/services/assistance.service';
 
 @Component({
   selector: 'assistances-overview-today',
   templateUrl: './assistances-overview-today.component.html',
 })
-export class AssistancesOverviewTodayComponent {
+export class AssistancesOverviewTodayComponent implements OnInit {
 
-  assistances: any[] = [];
-  totalAssistances: number = 0;
-  page: number = 0;
-  size: number = 10;
-  pages: number[] = [];
-  currentPage: number = 1;
-  searchName: string = '';
-  isLoading: boolean = true;
-  currentDate: string = new Date().toISOString().split('T')[0]; // Fecha actual en formato YYYY-MM-DD
+  assistances: any[] = []; // Lista de asistencias
+  totalAssistances = 0; // Total de resultados
+  pages: number[] = []; // Páginas disponibles
+  currentPage = 0; // Página actual
+  pageSize = 10; // Tamaño de página
+  isLoading = false; // Indicador de carga
+  searchName = ''; // Nombre para búsqueda
 
-  constructor(
-    private assistanceService: AssistanceService
-  ) { }
+  constructor(private assistanceService: AssistanceService) {}
 
   ngOnInit(): void {
-    this.getAssistances(); // Obtener las asistencias de hoy al iniciar el componente
+    this.loadAssistancesForToday();
   }
 
-  // Método para obtener las asistencias del día actual
-  getAssistances(): void {
+  // Cargar asistencias del día de hoy
+  loadAssistancesForToday(): void {
     this.isLoading = true;
-    this.assistanceService.getAssistancesByDate(this.currentDate, this.page, this.size).subscribe(
-      response => {
-        this.assistances = response.data.content;
-        this.totalAssistances = response.data.totalElements;
-        this.setPagination();
+    const today = new Date(); // Fecha en formato yyyy-MM-dd
+    const localDate = today.toLocaleDateString('en-CA');
+    this.assistanceService.getAssistancesByDate(localDate, this.currentPage, this.pageSize).subscribe({
+      next: (response) => {
+        this.assistances = response.data.content || [];
+        this.totalAssistances = response.data.totalElements || 0;
+        this.pages = Array.from({ length: response.data.totalPages || 0 }, (_, i) => i);
         this.isLoading = false;
       },
-      error => {
-        console.error('Error al obtener asistencias', error);
+      error: (error) => {
+        console.error('Error cargando asistencias:', error);
         this.isLoading = false;
-      }
-    );
+      },
+    });
   }
 
-  // Método para buscar asistencias por nombre de practicante
+  // Buscar asistencias por nombre de practicante
   searchAssistancesByName(): void {
     if (this.searchName.trim() === '') {
-      this.getAssistances();
+      this.loadAssistancesForToday();
+      return;
+    }
+
+    this.isLoading = true;
+    this.assistanceService.searchAssistancesByInternName(this.searchName, this.currentPage, this.pageSize).subscribe({
+      next: (response) => {
+        this.assistances = response.data.content || [];
+        this.totalAssistances = response.data.totalElements || 0;
+        this.pages = Array.from({ length: response.data.totalPages || 0 }, (_, i) => i);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        //console.error('Error buscando asistencias:', error);
+        this.isLoading = false;
+      },
+    });
+  }
+
+  // Cambiar a una página específica
+  goToPage(page: number): void {
+    if (page === this.currentPage) {
+      return; // Evitar recarga innecesaria
+    }
+
+    this.currentPage = page;
+    if (this.searchName.trim() === '') {
+      this.loadAssistancesForToday();
     } else {
-      this.isLoading = true;
-      this.assistanceService.searchAssistancesByInternName(this.searchName, this.page, this.size).subscribe(
-        response => {
-          this.assistances = response.data.content;
-          this.totalAssistances = response.data.totalElements;
-          this.setPagination();
-          this.isLoading = false;
-        },
-        error => {
-          console.error('Error al buscar asistencias', error);
-          this.isLoading = false;
-        }
-      );
+      this.searchAssistancesByName();
     }
   }
 
-  // Método para establecer la paginación
-  setPagination(): void {
-    this.pages = Array.from({ length: Math.ceil(this.totalAssistances / this.size) }, (_, i) => i + 1);
-  }
-
-  // Método para ir a una página específica
-  goToPage(page: number): void {
-    this.page = page - 1;
-    this.currentPage = page;
-    this.getAssistances();
-  }
 }

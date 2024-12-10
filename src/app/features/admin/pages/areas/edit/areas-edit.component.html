@@ -11,26 +11,40 @@
     <h1>Editar Área</h1>
   </div>
 
-  <form action="" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
+  <form (ngSubmit)="updateArea()" #areaForm="ngForm" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
+    <!-- Nombre -->
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Nombre</label>
-      <input type="text" class="input" placeholder="Ingrese los nombres del administrador">
+      <label for="name" class="text-sm font-medium">Nombre</label>
+      <input id="name" name="name" [(ngModel)]="area.name" #name="ngModel" required minlength="3" maxlength="50"
+        type="text" class="input" placeholder="Ingrese el nombre del área">
+      <p class="text-sm text-red-600" *ngIf="name.invalid && name.touched">
+        <!-- Validación personalizada -->
+        <span *ngIf="name.errors?.['required']">El nombre es obligatorio.</span>
+        <span *ngIf="name.errors?.['minlength']">Debe tener al menos 3 caracteres.</span>
+        <span *ngIf="name.errors?.['maxlength']">No puede exceder los 50 caracteres.</span>
+      </p>
     </div>
 
+    <!-- Número de vacantes -->
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Vacantes disponibles</label>
-      <input type="number" class="input" placeholder="Ingrese la cantidad de vacantes disponibles">
+      <label for="nroVacancies" class="text-sm font-medium">Vacantes disponibles</label>
+      <input id="nroVacancies" name="nroVacancies" [(ngModel)]="area.nroVacancies" #nroVacancies="ngModel" required min="1"
+        type="number" class="input" placeholder="Ingrese la cantidad de vacantes disponibles">
+      <p class="text-sm text-red-600" *ngIf="nroVacancies.invalid && nroVacancies.touched">
+        <!-- Validación personalizada -->
+        <span *ngIf="nroVacancies.errors?.['required']">Este campo es obligatorio.</span>
+        <span *ngIf="nroVacancies.errors?.['min']">Debe ingresar al menos 1 vacante.</span>
+      </p>
     </div>
-
     <div class="flex flex-col col-span-2 space-y-2">
-      <label for="" class="text-sm font-medium">Estado:</label>
-      <select name="" id="" class="input">
-        <option value="1">Activo</option>
-        <option value="0">Inactivo</option>
+      <label for="status" class="text-sm font-medium">Estado:</label>
+      <select name="status" id="status" class="input" [(ngModel)]="area.status" required>
+        <option [value]="true">Activo</option>
+        <option [value]="false">Inactivo</option>
       </select>
     </div>
 
-    <button class="w-full btn-primary">Registrar</button>
+    <button type="submit" [disabled]="!areaForm.valid" class="w-full btn-primary disabled:opacity-75 disabled:pointer-events-none">Guardar Cambios</button>
     <a routerLink="../.." class="w-full btn-secondary">Cancelar</a>
 
   </form>

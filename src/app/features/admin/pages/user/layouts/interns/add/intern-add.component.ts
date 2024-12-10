@@ -136,16 +136,16 @@ export class InternAddComponent {
       return;
     }
 
-    console.log('Datos enviados:', this.intern); // Verifica los datos antes de enviarlos
+    // console.log('Datos enviados:', this.intern); // Verifica los datos antes de enviarlos
 
     // Asegúrate de que totalHours esté en el formato correcto
-    console.log('Horas enviadas:', this.intern.totalHours);
+    // console.log('Horas enviadas:', this.intern.totalHours);
 
     this.internService.addIntern(this.intern).subscribe(
       (response) => {
-        console.log('Respuesta del servidor:', response);
+        // console.log('Respuesta del servidor:', response);
         Swal.fire('Éxito', 'El practicante ha sido registrado.', 'success');
-        this.router.navigate(['/admin/usuarios/practicantes']); // Redirigir a la lista de practicantes
+        this.router.navigate(['/admin/practicantes']); // Redirigir a la lista de practicantes
       },
       (error) => {
         const errorMessage = error?.error?.error || 'No se pudo registrar el practicante.';

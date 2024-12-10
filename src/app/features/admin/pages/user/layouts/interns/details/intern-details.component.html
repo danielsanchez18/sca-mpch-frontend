@@ -1,4 +1,4 @@
-<section class="space-y-10">
+<section class="px-20 py-10 space-y-10 size-full">
   <div class="flex items-center gap-x-3">
     <a routerLink=".." class="p-1 text-gray-500 rounded-full hover:text-black hover:bg-gray-200">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -7,12 +7,14 @@
         <path d="m15 18-6-6 6-6" />
       </svg>
     </a>
-    <h2>Detalles del Practicante</h2>
+    <h1>Detalles del Practicante</h1>
   </div>
 
   <article class="grid grid-cols-[auto_1fr] px-10 gap-x-10">
     <div class="bg-gray-100 rounded-full size-40">
-      <img *ngIf="intern.user.photo" [src]="intern.user.photo" alt="Foto de perfil" class="object-cover w-full h-full rounded-full">
+
+      <img src="img/user.webp" alt="" class="object-cover p-2 rounded-full">
+
     </div>
 
     <div class="space-y-2">

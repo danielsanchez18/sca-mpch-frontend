@@ -10,38 +10,60 @@
     <h2>Editar Seguridad</h2>
   </div>
 
-  <form action="" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
+  <form (ngSubmit)="updatedSecurity()" #securityForm="ngForm" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Nombre</label>
-      <input type="text" class="input" placeholder="Ingrese los nombres del seguridad">
+      <label for="name" class="text-sm font-medium">Nombre</label>
+      <input id="name" name="name" [(ngModel)]="security.user.name" type="text" class="input"
+        placeholder="Ingrese los nombres del seguridad" required minlength="3" #name="ngModel">
+      <div *ngIf="name.invalid && name.touched" class="text-sm text-red-500">
+        <span *ngIf="name.errors?.['required']">El nombre es requerido.</span>
+        <span *ngIf="name.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</span>
+      </div>
     </div>
 
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Apellidos</label>
-      <input type="text" class="input" placeholder="Ingrese los apellidos del seguridad">
+      <label for="lastname" class="text-sm font-medium">Apellidos</label>
+      <input id="lastname" name="lastname" [(ngModel)]="security.user.lastname" type="text" class="input"
+        placeholder="Ingrese los apellidos del securidad" required #lastname="ngModel">
+      <div *ngIf="lastname.invalid && lastname.touched" class="text-sm text-red-500">
+        <span *ngIf="lastname.errors?.['required']">El apellido es requerido.</span>
+        <span *ngIf="lastname.errors?.['minlength']">El apellido debe tener al menos 3 caracteres.</span>
+      </div>
     </div>
 
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">DNI</label>
-      <input type="text" class="input" placeholder="Ingrese el DNI del seguridad">
+      <label for="dni" class="text-sm font-medium">DNI</label>
+      <input id="dni" name="dni" [(ngModel)]="security.user.dni" type="text" class="input"
+        placeholder="Ingrese el DNI del seguridad" required required pattern="^[0-9]{8}$" #dni="ngModel">
+      <div *ngIf="dni.invalid && dni.touched" class="text-sm text-red-500">
+        <span *ngIf="dni.errors?.['required']">El DNI es requerido.</span>
+        <span *ngIf="dni.errors?.['pattern']">El DNI debe tener exactamente 8 dígitos.</span>
+      </div>
+    </div>
+
+
+    <div class="flex flex-col space-y-2">
+      <label for="birthdate" class="text-sm font-medium">Fecha de Nacimiento:</label>
+      <input type="date" class="input" placeholder="Ingrese su fecha de nacimiento"
+        [(ngModel)]="security.user.birthdate" name="birthdate" required>
     </div>
 
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Fecha de Nacimiento:</label>
-      <input type="date" class="input" placeholder="Ingrese su fecha de nacimiento">
-    </div>
-
-    <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Estado:</label>
-      <select name="" id="" class="input">
-        <option value="1">Activo</option>
-        <option value="0">Inactivo</option>
+      <label for="status" class="text-sm font-medium">Estado:</label>
+      <select name="status" id="status" class="input" [(ngModel)]="security.user.status" required>
+        <option [value]="true">Activo</option>
+        <option [value]="false">Inactivo</option>
       </select>
     </div>
 
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Contraseña</label>
-      <input type="password" class="input" placeholder="Ingrese su contraseña">
+      <label for="password" class="text-sm font-medium">Contraseña</label>
+      <input type="password" id="password" name="password" [(ngModel)]="security.password" class="input"
+        placeholder="Ingrese su contraseña" required minlength="8" #password="ngModel">
+      <div *ngIf="password.invalid && password.touched" class="text-sm text-red-500">
+        <span *ngIf="password.errors?.['required']">La contraseña es requerida.</span>
+        <span *ngIf="password.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</span>
+      </div>
     </div>
 
     <div class="col-span-2" data-hs-file-upload='{
@@ -87,7 +109,8 @@
       </div>
     </div>
 
-    <button class="w-full btn-primary">Aplicar Cambios</button>
+    <button type="submit" [disabled]="!securityForm.valid"
+    class="w-full btn-primary disabled:opacity-75 disabled:pointer-events-none">Aplicar Cambios</button>
     <a routerLink="../.." class="w-full btn-secondary">Cancelar</a>
 
   </form>

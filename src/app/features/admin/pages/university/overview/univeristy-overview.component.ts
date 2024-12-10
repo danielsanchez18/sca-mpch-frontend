@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { University } from '../../../../../core/interfaces/university.interface';
 import { UniversityService } from '../../../../../core/services/university.service';
 import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { InternService } from '../../../../../core/services/intern.service';
 
 @Component({
   selector: 'univeristy-overview',
@@ -9,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class UniveristyOverviewComponent {
 
-  universities: University[] = []; // Array para almacenar las universidades
+  universities: any[] = []; // Array para almacenar las universidades
   totalUniversities: number = 0; // Total de universidades
   page: number = 0; // Página actual
   size: number = 10; // Tamaño de la página
@@ -19,7 +22,13 @@ export class UniveristyOverviewComponent {
 
   isLoading: boolean = true;
 
-  constructor(private universityService: UniversityService) { }
+  countInterns: number = 0; // Número de practicantes
+
+  constructor(
+    private universityService: UniversityService,
+    private internService: InternService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.getUniversities(); // Obtener universidades al iniciar el componente
@@ -33,11 +42,37 @@ export class UniveristyOverviewComponent {
         this.totalUniversities = response.data.totalElements; // Total de universidades
         this.setPagination(); // Establecer la paginación
 
+        // Inicializar internCount en 0 para cada universidad
+        this.universities.forEach((university: any) => {
+          university['internCount'] = 0; // Agregar internCount dinámicamente
+        });
+
+        // Obtener el número de practicantes por cada universidad
+        this.universities.forEach((university) => {
+          this.getInternsCount(university); // Obtener el número de practicantes para cada universidad
+        });
+
         this.isLoading = false;
       },
       error => {
         console.error('Error al obtener las universidades', error);
         this.isLoading = false;
+      }
+    );
+  }
+
+  // Método para obtener el número de practicantes asociados a una universidad
+  getInternsCount(university: any): void {
+    this.internService.findInternsByUniversity(university.name, this.page, this.size).subscribe(
+      response => {
+        // Actualizar el número de practicantes para esta universidad
+        const internCount = response.data.totalElements; // Número de practicantes
+        university['internCount'] = internCount; // Establecer el valor en el objeto universidad
+
+        // console.log('Practicantes para la universidad', university.name, university['internCount']);
+      },
+      error => {
+        console.error('Error al obtener los practicantes', error);
       }
     );
   }
@@ -82,9 +117,13 @@ export class UniveristyOverviewComponent {
           response => {
             Swal.fire('¡Eliminado!', 'La universidad ha sido eliminada', 'success');
             this.getUniversities(); // Actualizar la lista de universidades
+            this.router.navigate(['/admin/universidades']);
           },
-          error => {
-            console.error('Error al eliminar la universidad', error);
+          (error: HttpErrorResponse) => {
+            // Revisar si el error tiene un mensaje de error desde el backend
+            const errorMessage = error?.error?.error || 'No se pudo eliminar la universidad.';
+            // console.error('Error al agregar el administrador', error);
+            Swal.fire('Error', errorMessage, 'error');
           }
         );
       }

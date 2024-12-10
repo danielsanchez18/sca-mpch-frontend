@@ -4,6 +4,7 @@ import { AdminService } from '../../../../../../../core/services/admin.service';
 import Swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { User } from '../../../../../../../core/interfaces/user.interface';
 
 @Component({
   selector: 'admin-add',
@@ -25,7 +26,7 @@ export class AdminAddComponent {
       birthdate: '',
       photo: '',
       status: true,
-    }
+    } as User
   };
 
   constructor(

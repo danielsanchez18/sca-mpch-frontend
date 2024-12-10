@@ -11,41 +11,27 @@
     <h1>Editar Área Laboral</h1>
   </div>
 
-  <form action="" class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
+  <form class="grid grid-cols-2 px-10 gap-x-10 gap-y-7">
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Área:</label>
-      <select name="" id="" class="input" disabled>
-        <option value="1">Programación</option>
-        <option value="0">Administración</option>
-        <option value="0">Finanzas</option>
-        <option value="0">Marketing</option>
-        <option value="0">Área Legal</option>
-        <option value="0">Logística</option>
-      </select>
+      <label for="area" class="text-sm font-medium">Área:</label>
+      <input type="text" id="area" name="area" [value]="areaUniversity.area.name" class="input" disabled >
       <div class="flex justify-between px-4 py-1 text-xs font-medium">
-        <p class=" text-primary">Nro de vacantes disponibles: 4</p>
-        <a routerLink="/admin/areas/1" class="hover:underline underline-offset-4">Ver área</a>
+        <p class=" text-primary">Nro de vacantes disponibles: {{ areaUniversity.area.nroVacancies }}</p>
+        <a routerLink="/admin/areas/{{ areaUniversity.area.idArea }}" class="hover:underline underline-offset-4">Ver área</a>
       </div>
     </div>
 
     <div class="flex flex-col space-y-2">
-      <label for="" class="text-sm font-medium">Universidad:</label>
-      <select name="" id="" class="input" disabled>
-        <option value="1">Universidad Nacional Pedro Ruiz Gallo</option>
-        <option value="0">Universidad Tecnológica del Perú</option>
-        <option value="0">Universidad Santo Toribio de Mogrovejo</option>
-        <option value="0">Universidad Señor de Sipán</option>
-        <option value="0">Universidad San Marcos</option>
-        <option value="0">Universidad Nacional de Trujillo</option>
-      </select>
+      <label for="universidad" class="text-sm font-medium">Universidad:</label>
+      <input type="text" id="area" name="area" [value]="areaUniversity.university.name" class="input" disabled >
     </div>
 
     <div class="flex flex-col col-span-2 space-y-2">
-      <label for="" class="text-sm font-medium">Número de horas para certificación:</label>
-      <input type="number" class="input" placeholder="Ingrese el número de horas">
+      <label for="certifiedHours" class="text-sm font-medium">Número de horas para certificación:</label>
+      <input type="number" [(ngModel)]="areaUniversity.hoursCertified" id="certifiedHours" name="certifiedHours" class="input" placeholder="Ingrese el número de horas">
     </div>
 
-    <button class="w-full btn-primary">Aplicar Cambios</button>
+    <button class="w-full btn-primary">Guardar Cambios</button>
     <a routerLink="../.." class="w-full btn-secondary">Cancelar</a>
 
   </form>

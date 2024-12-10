@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../../../../../core/services/admin.service';
 import { Admin, PaginatedAdmins, ResponseAdmins } from '../../../../../../../core/interfaces/admin.interface';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'admin-overview',
@@ -19,7 +20,10 @@ export class AdminOverviewComponent implements OnInit {
 
   isLoading: boolean = true;
 
-  constructor(private adminService: AdminService) { }
+  constructor(
+    private adminService: AdminService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.getAdmins(); // Obtener administradores al iniciar el componente
@@ -77,9 +81,10 @@ export class AdminOverviewComponent implements OnInit {
           () => {
             Swal.fire('Eliminado!', 'El administrador ha sido eliminado.', 'success');
             this.getAdmins(); // Refrescar la lista después de eliminar
+            this.router.navigate(['/admin/usuarios/administradores']);  // Redirigir a la lista de administradores
           },
           error => {
-            console.error('Error al eliminar el administrador', error);
+            //console.error('Error al eliminar el administrador', error);
             Swal.fire('Error!', 'No se pudo eliminar el administrador.', 'error');
           }
         );

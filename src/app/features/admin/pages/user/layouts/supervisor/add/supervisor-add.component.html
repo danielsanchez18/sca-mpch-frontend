@@ -14,19 +14,37 @@
     <div class="flex flex-col space-y-2">
       <label for="name" class="text-sm font-medium">Nombre</label>
       <input id="name" name="name" [(ngModel)]="supervisor.user.name" type="text" class="input"
-        placeholder="Ingrese los nombres del administrador" required>
+        placeholder="Ingrese los nombres del supervisor" required minlength="3" maxlength="50"
+        #name="ngModel">
+      <small *ngIf="name.touched && name.invalid" class="text-red-500">
+        <span *ngIf="name.errors?.['required']">El nombre es obligatorio.</span>
+        <span *ngIf="name.errors?.['minlength']">El nombre debe tener al menos 2 caracteres.</span>
+        <span *ngIf="name.errors?.['maxlength']">El nombre no debe exceder los 50 caracteres.</span>
+      </small>
     </div>
 
     <div class="flex flex-col space-y-2">
       <label for="lastname" class="text-sm font-medium">Apellidos</label>
       <input id="lastname" name="lastname" [(ngModel)]="supervisor.user.lastname" type="text" class="input"
-        placeholder="Ingrese los apellidos del administrador" required>
+        placeholder="Ingrese los apellidos del supervisor" required minlength="2" maxlength="50"
+        #lastname="ngModel">
+      <small *ngIf="lastname.touched && lastname.invalid" class="text-red-500">
+        <span *ngIf="lastname.errors?.['required']">Los apellidos son obligatorios.</span>
+        <span *ngIf="lastname.errors?.['minlength']">Los apellidos deben tener al menos 2 caracteres.</span>
+        <span *ngIf="lastname.errors?.['maxlength']">Los apellidos no deben exceder los 50 caracteres.</span>
+      </small>
     </div>
 
     <div class="flex flex-col space-y-2">
       <label for="dni" class="text-sm font-medium">DNI</label>
       <input id="dni" name="dni" [(ngModel)]="supervisor.user.dni" type="text" class="input"
-        placeholder="Ingrese el DNI del administrador" required>
+        placeholder="Ingrese el DNI del supervisor" required minlength="8" maxlength="8"
+        #dni="ngModel">
+      <small *ngIf="dni.touched && dni.invalid" class="text-red-500">
+        <span *ngIf="dni.errors?.['required']">El DNI es obligatorio.</span>
+        <span *ngIf="dni.errors?.['minlength']">El DNI debe tener exactamente 8 caracteres.</span>
+        <span *ngIf="dni.errors?.['maxlength']">El DNI debe tener exactamente 8 caracteres.</span>
+      </small>
     </div>
 
     <div class="flex flex-col space-y-2">
@@ -46,7 +64,13 @@
     <div class="flex flex-col space-y-2">
       <label for="password" class="text-sm font-medium">Contraseña</label>
       <input type="password" id="password" name="password" [(ngModel)]="supervisor.password" class="input"
-        placeholder="Ingrese su contraseña" required>
+        placeholder="Ingrese su contraseña" required minlength="8" maxlength="20"
+        #password="ngModel">
+      <small *ngIf="password.touched && password.invalid" class="text-red-500">
+        <span *ngIf="password.errors?.['required']">La contraseña es obligatoria.</span>
+        <span *ngIf="password.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</span>
+        <span *ngIf="password.errors?.['maxlength']">La contraseña no debe exceder los 20 caracteres.</span>
+      </small>
     </div>
 
     <div class="col-span-2" data-hs-file-upload='{

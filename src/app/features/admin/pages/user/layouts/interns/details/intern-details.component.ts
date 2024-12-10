@@ -37,7 +37,7 @@ export class InternDetailsComponent implements OnInit {
   deleteIntern(idIntern: string): void {
     Swal.fire({
       title: '¿Estás seguro?',
-      text: 'Esta acción no se puede deshacer.',
+      text: 'Todos los registros asociados al practicante serán eliminados.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
@@ -46,9 +46,9 @@ export class InternDetailsComponent implements OnInit {
       if (result.isConfirmed) {
         this.internService.deleteIntern(idIntern).subscribe(
           () => {
-            Swal.fire('Eliminado', 'El administrador ha sido eliminado.', 'success');
+            Swal.fire('Eliminado', 'El practicante ha sido eliminado.', 'success');
             // Redirigir a la lista de practicantes o a otra página
-            this.router.navigate(['/admin/usuarios/practicantes']);  // Redirigir a la lista de practicantes
+            this.router.navigate(['/admin/practicantes']);  // Redirigir a la lista de practicantes
           },
           (error: any) => {
             console.error('Error al eliminar el practicante', error);

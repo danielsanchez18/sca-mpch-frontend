@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { URL } from '../utils/api';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginRequest, LoginResponse } from '../interfaces/login.interface';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { User } from '../interfaces/user.interface';
 
 @Injectable({
@@ -14,16 +14,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  // Método para hacer login
-  // login(credentials: LoginRequest): Observable<LoginResponse> {
-  //   return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials);
-  // }
-
-  login(credentials: LoginRequest): Observable<LoginResponse> {
+  login(credentials: LoginRequest): Observable<void> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials).pipe(
-      tap(response => {
-        this.saveToken(response.token); // Guarda el token en localStorage
-      })
+      tap(response => this.saveToken(response.token)), // Guardar el token
+      switchMap(response => this.getCurrentUser(response.token)), // Obtener el usuario actual
+      tap(user => localStorage.setItem('userRole', user.role.name)), // Guardar el rol
+      map(() => { }) // Cambiar el observable para emitir `void`
     );
   }
 
@@ -40,11 +36,17 @@ export class AuthService {
   // Eliminar token (logout)
   logout(): void {
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('userRole');
   }
 
   getCurrentUser(token: string): Observable<User> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<User>(`${this.apiUrl}/current-user`, { headers });
+  }
+
+  // Obtener el rol guardado
+  getUserRole(): string | null {
+    return localStorage.getItem('userRole');
   }
 
 }

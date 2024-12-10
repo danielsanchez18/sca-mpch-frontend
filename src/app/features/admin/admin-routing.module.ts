@@ -92,27 +92,27 @@ const routes: Routes = [
             path: 'seguridad', component: SecurityOverviewComponent,
           },
           {
-            path: 'seguridad/1', component: SecurityDetailsComponent,
-          },
-          {
             path: 'seguridad/agregar', component: SecurityAddComponent,
           },
           {
+            path: 'seguridad/:id', component: SecurityDetailsComponent,
+          },
+          {
             path: 'seguridad/:id/editar', component: SecurityEditComponent,
-          },
-          {
-            path: 'practicantes', component: InternOverviewComponent,
-          },
-          {
-            path: 'practicantes/agregar', component: InternAddComponent,
-          },
-          {
-            path: 'practicantes/:id', component: InternDetailsComponent,
-          },
-          {
-            path: 'practicantes/:id/editar', component: InternEditComponent,
           }
         ]
+      },
+      {
+        path: 'practicantes', component: InternOverviewComponent,
+      },
+      {
+        path: 'practicantes/agregar', component: InternAddComponent,
+      },
+      {
+        path: 'practicantes/:id', component: InternDetailsComponent,
+      },
+      {
+        path: 'practicantes/:id/editar', component: InternEditComponent,
       },
       {
         path: 'asistencias', component: AssistancesRegisterComponent,

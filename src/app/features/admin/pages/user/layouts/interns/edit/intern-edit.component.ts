@@ -151,7 +151,7 @@ export class InternEditComponent implements OnInit {
       (response) => {
         console.log('Respuesta del servidor:', response);
         Swal.fire('Éxito', 'El practicante ha sido actualizado.', 'success');
-        this.router.navigate(['/admin/usuarios/practicantes']);
+        this.router.navigate(['/admin/practicantes']);
       },
       (error) => {
         const errorMessage = error?.error?.error || 'No se pudo actualizar el practicante.';

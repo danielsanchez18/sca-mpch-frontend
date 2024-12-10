@@ -1,1 +1,46 @@
-<p>assistances-overview-week works!</p>,
+<div class="-m-1.5 overflow-x-auto">
+  <div class="p-1.5 min-w-full inline-block align-middle space-y-5">
+    <div class="flex items-center justify-start text-sm gap-x-3">
+      <input type="text" [(ngModel)]="searchName" (input)="searchAssistancesByName()" class="text-xs input"
+        placeholder="Buscar practicante">
+    </div>
+
+    <div *ngIf="isLoading" class="flex items-center justify-center bg-gray-100 rounded-xl min-h-80">
+      <p>Cargando...</p>
+    </div>
+
+    <div *ngIf="!isLoading" class="overflow-hidden rounded-md">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-primary">
+          <tr class="text-xs text-white uppercase">
+            <th scope="col" class="px-6 py-3 font-medium text-start">Nombre</th>
+            <th scope="col" class="px-6 py-3 font-medium text-center">Área</th>
+            <th scope="col" class="px-6 py-3 font-medium text-center">Entrada</th>
+            <th scope="col" class="px-6 py-3 font-medium text-center">Salida</th>
+            <th scope="col" class="px-6 py-3 font-medium text-center">Horas</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y-2 divide-white">
+          <tr *ngFor="let assistance of assistances" class="text-sm font-medium text-gray-800 uppercase bg-gray-100">
+            <td class="px-6 py-2.5 whitespace-nowrap">{{ assistance.intern.user.name }} {{ assistance.intern.user.lastname }}</td>
+            <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.intern.areaUniversity.area.name }}</td>
+            <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.checkIn | TimeFormat }}</td>
+            <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.checkOut | TimeFormat }}</td>
+            <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ assistance.hoursWorked | DecimalHours }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex items-center justify-between px-6 text-sm gap-x-10">
+      <p>{{ totalAssistances }} resultados</p>
+      <nav class="flex items-center gap-x-1">
+        <button *ngFor="let page of pages" (click)="goToPage(page)"
+          class="px-3 py-1 text-sm rounded-md hover:bg-gray-200"
+          [ngClass]="{ 'bg-primary text-white font-semibold pointer-events-none': page === currentPage }">
+          {{ page + 1 }}
+        </button>
+      </nav>
+    </div>
+  </div>
+</div>

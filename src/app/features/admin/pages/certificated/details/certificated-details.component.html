@@ -18,12 +18,18 @@
     </div>
     <div>
       <h1 class="text-xl font-semibold text-center">CERTIFICADO DE PRÁCTICAS</h1>
-      <p class="text-sm font-semibold text-center">N° 0001-2021</p>
+      <p class="text-sm font-semibold text-center">N° {{ certificated?.idCertificated }}</p>
     </div>
 
     <div class="text-center uppercase">
       <p>Otorgado a:</p>
-      <p>JUAN DANIEL SANCHEZ PISFIL</p>
+      <p>{{ certificated?.intern?.user?.name }} {{ certificated?.intern?.user?.lastname }}</p>
+    </div>
+
+    <!-- Agregar más detalles del certificado si es necesario -->
+    <div class="text-center">
+      <p>Status: {{ certificated?.status ? 'Válido' : 'No válido' }}</p>
+      <p>Fecha de emisión: {{ certificated?.generatedDate | date: 'dd/MM/yyyy' }}</p>
     </div>
   </article>
 

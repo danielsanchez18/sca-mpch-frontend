@@ -17,28 +17,28 @@
 
       <div class="flex items-center gap-x-3">
         <p class="text-sm">Área:</p>
-        <p class="text-sm font-semibold">Programación</p>
+        <p class="text-sm font-semibold">{{ areaUniversity?.area?.name }}</p>
       </div>
       <div class="flex items-center gap-x-3">
         <p class="text-sm">Número de vacantes:</p>
-        <p class="text-sm font-semibold">18</p>
+        <p class="text-sm font-semibold">{{ areaUniversity?.area?.nroVacancies }}</p>
       </div>
       <div class="flex items-center gap-x-3">
         <p class="text-sm">Universidad:</p>
-        <p class="text-sm font-semibold">Universidad Tecnologica del Perú</p>
+        <p class="text-sm font-semibold">{{ areaUniversity?.university?.name }}</p>
       </div>
       <div class="flex items-center gap-x-3">
         <p class="text-sm">Practicantes registrados:</p>
-        <p class="text-sm font-semibold">10</p>
+        <p class="text-sm font-semibold">{{ activeInterns.length }}</p>
       </div>
       <div class="flex items-center gap-x-3">
         <p class="text-sm">Horas para certificación:</p>
-        <p class="text-sm font-semibold">90 horas</p>
+        <p class="text-sm font-semibold">{{ areaUniversity?.hoursCertified }} horas</p>
       </div>
 
       <div class="flex items-center py-5 gap-x-2">
         <a routerLink="editar" class="btn-primary">Editar</a>
-        <button type="button" class="btn-danger">Eliminar</button>
+        <button (click)="deleteAreaUniversity(areaUniversity!.idAreaUniversity)" class="btn-danger">Eliminar</button>
       </div>
     </article>
 
@@ -52,7 +52,7 @@
         </select>
       </div>
       <div class="flex items-center gap-x-5">
-        <h1>500</h1>
+        <h1>10</h1>
         <p class="text-sm font-semibold text-red-600">95%</p>
       </div>
       <div class="w-full h-52">
@@ -66,10 +66,7 @@
       <div class="flex flex-col">
         <div class="-m-1.5 overflow-x-auto">
           <div class="p-1.5 min-w-full inline-block align-middle space-y-5">
-            <div class="flex items-center justify-between gap-x-3">
-              <h2>Lista de practicantes (0)</h2>
-              <input type="text" class="text-xs input" placeholder="Buscar practicante">
-            </div>
+            <h2>Lista de practicantes ({{ activeInterns.length }})</h2>
 
             <div class="overflow-hidden rounded-md">
               <table class="min-w-full divide-y divide-gray-200">
@@ -81,50 +78,26 @@
                   </tr>
                 </thead>
                 <tbody class="divide-y-2 divide-white">
-                  <tr routerLink="/admin/usuarios/practicantes/1"
+                  <tr *ngFor="let intern of activeInterns"
+                    [routerLink]="['/admin/usuarios/practicantes', intern.idIntern]"
                     class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-gray-50">
-                    <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-                    <td class="px-6 py-2.5 text-center whitespace-nowrap">27/11/2024</td>
-                    <td class="px-6 py-2.5 text-center whitespace-nowrap">48/103</td>
-                  </tr>
-                  <tr routerLink="/admin/usuarios/practicantes/1"
-                    class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-gray-50">
-                    <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-                    <td class="px-6 py-2.5 text-center whitespace-nowrap">27/11/2024</td>
-                    <td class="px-6 py-2.5 text-center whitespace-nowrap">48/103</td>
-                  </tr>
-                  <tr routerLink="/admin/usuarios/practicantes/1"
-                    class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-gray-50">
-                    <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-                    <td class="px-6 py-2.5 text-center whitespace-nowrap">27/11/2024</td>
-                    <td class="px-6 py-2.5 text-center whitespace-nowrap">48/103</td>
-                  </tr>
-                  <tr routerLink="/admin/usuarios/practicantes/1"
-                    class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-gray-50">
-                    <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-                    <td class="px-6 py-2.5 text-center whitespace-nowrap">27/11/2024</td>
-                    <td class="px-6 py-2.5 text-center whitespace-nowrap">48/103</td>
-                  </tr>
-                  <tr routerLink="/admin/usuarios/practicantes/1"
-                    class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-gray-50">
-                    <td class="px-6 py-2.5 whitespace-nowrap">Nombre completo del practicante</td>
-                    <td class="px-6 py-2.5 text-center whitespace-nowrap">27/11/2024</td>
-                    <td class="px-6 py-2.5 text-center whitespace-nowrap">48/103</td>
+                    <td class="px-6 py-2.5 whitespace-nowrap">{{ intern.user.name }} {{ intern.user.lastname }}</td>
+                    <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ intern.user.createdAt | localDate }}</td>
+                    <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ intern.totalHours | DecimalHours }}/{{ intern.areaUniversity.hoursCertified }}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div class="flex items-center justify-between px-6 text-sm gap-x-10">
-              <p>150 resultados</p>
 
-              <!-- Paginador -->
-              <nav class="flex items-center gap-x-3">
-                <button
-                  class="flex items-center justify-center p-2 font-semibold text-white rounded-md border-primary bg-primary size-7">1</button>
-                <button
-                  class="flex items-center justify-center p-2 font-semibold text-gray-800 bg-white border rounded-md size-7">2</button>
-                <button
-                  class="flex items-center justify-center p-2 font-semibold text-gray-800 bg-white border rounded-md size-7">3</button>
+            <div class="flex items-center justify-between px-6 text-sm gap-x-10">
+              <p>{{ activeInterns.length }} resultados</p>
+
+              <nav class="flex items-center">
+                <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i + 1)"
+                  class="px-3 py-1 text-sm rounded-md hover:bg-gray-200"
+                  [ngClass]="{ 'bg-primary text-white font-semibold pointer-events-none': i === currentPage }">
+                  {{ i + 1 }}
+                </button>
               </nav>
             </div>
           </div>

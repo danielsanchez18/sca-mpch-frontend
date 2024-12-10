@@ -3,6 +3,7 @@ import { Intern } from '../../../../../../../core/interfaces/intern.interface';
 import { InternService } from '../../../../../../../core/services/intern.service';
 import { AssistanceService } from '../../../../../../../core/services/assistance.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'intern-overview',
@@ -20,7 +21,10 @@ export class InternOverviewComponent implements OnInit {
 
   isLoading: boolean = true;
 
-  constructor(private internService: InternService) { }
+  constructor(
+    private internService: InternService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.getInterns(); // Obtener practicantes al iniciar el componente
@@ -38,7 +42,7 @@ export class InternOverviewComponent implements OnInit {
         this.isLoading = false;
       },
       error => {
-        console.error('Error al obtener los practicantes', error);
+        //console.error('Error al obtener los practicantes', error);
         this.isLoading = false;
       }
     );
@@ -66,7 +70,7 @@ export class InternOverviewComponent implements OnInit {
   deleteIntern(idIntern: string): void {
     Swal.fire({
       title: '¿Estás seguro?',
-      text: '¡No podrás revertir esta acción!',
+      text: '¡Todos los registros asociados al practicante serán eliminados!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, eliminar',
@@ -78,6 +82,7 @@ export class InternOverviewComponent implements OnInit {
           () => {
             Swal.fire('Eliminado!', 'El practicante ha sido eliminado.', 'success');
             this.getInterns(); // Refrescar la lista después de eliminar
+            this.router.navigate(['/admin/practicantes']);  // Redirigir a la lista de practicantes
           },
           error => {
             console.error('Error al eliminar el practicante', error);

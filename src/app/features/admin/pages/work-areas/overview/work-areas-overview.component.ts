@@ -4,6 +4,7 @@ import { AreaUniversityService } from '../../../../../core/services/area-univers
 import { UniversityService } from '../../../../../core/services/university.service';
 import { Router } from '@angular/router';
 import { InternService } from '../../../../../core/services/intern.service';
+import { forkJoin, map } from 'rxjs';
 
 @Component({
   selector: 'work-areas-overview',
@@ -29,9 +30,21 @@ export class WorkAreasOverviewComponent {
       (response) => {
         this.areas = response.data.content;
 
-        // Para cada área, cargar universidades asociadas
-        this.areas.forEach(area => {
-          this.loadUniversitiesForArea(area.idArea);
+        const universityRequests = this.areas.map(area =>
+          this.areaUniversityService.getUniversitiesByArea(area.idArea).pipe(
+            map(response => {
+              area.universities = response.data.content || [];
+              return area;
+            })
+          )
+        );
+
+        forkJoin(universityRequests).subscribe(() => {
+          this.areas.forEach(area => {
+            area.universities.forEach((university: any) => {
+              this.loadInternsForAreaUniversity(university.idAreaUniversity);
+            });
+          });
         });
       },
       (error) => {
@@ -40,30 +53,11 @@ export class WorkAreasOverviewComponent {
     );
   }
 
-  loadUniversitiesForArea(areaId: number): void {
-    this.areaUniversityService.getUniversitiesByArea(areaId).subscribe(
-      (response) => {
-        const area = this.areas.find(a => a.idArea === areaId);
-        if (area) {
-          area.universities = response.data.content || []; // Asegurarse de inicializar como un array vacío
-
-          // Cargar practicantes para cada universidad del área
-          area.universities.forEach((university: any) => {
-            this.loadInternsForAreaUniversity(university.idAreaUniversity);
-          });
-        }
-      },
-      (error) => {
-        console.error('Error al cargar universidades para área', error);
-      }
-    );
-  }
-
   loadInternsForAreaUniversity(idAreaUniversity: string): void {
     this.internService.findInternsByAreaUniversity(idAreaUniversity).subscribe(
       (response) => {
         const areaUniversity = this.areas
-          .flatMap(area => area.universities || []) // Manejar caso donde `universities` no exista
+          .flatMap(area => area.universities || [])
           .find(au => au.idAreaUniversity === idAreaUniversity);
 
         if (areaUniversity) {
@@ -82,7 +76,7 @@ export class WorkAreasOverviewComponent {
 
   navigateToAddUniversity(area: any): void {
     this.router.navigate(['/admin/areas-laborales/agregar', area.idArea], {
-      state: { area: area } // Opcional: pasar el objeto área completo si lo necesitas
+      state: { area: area }
     });
   }
 

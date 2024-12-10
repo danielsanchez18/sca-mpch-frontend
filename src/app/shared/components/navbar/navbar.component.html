@@ -12,7 +12,10 @@
       <p class="text-xs text-gray-400 capitalize text-end">{{ userRole }}</p>
     </div>
 
-    <div class="ml-4 bg-gray-200 rounded-full size-10"></div>
+    <div class="ml-4 bg-gray-200 rounded-full size-10">
+      <img src="img/user.webp" alt="" class="object-cover p-2 rounded-full">
+
+    </div>
 
     <div class="relative inline-flex hs-dropdown">
       <button id="hs-dropdown-default" type="button"
@@ -29,8 +32,10 @@
         class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
         role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-default">
         <div class="p-1 space-y-0.5">
+
+          @if (currentUser?.role?.name === 'administrador') {
           <a class="flex items-center px-5 py-2 text-xs font-medium text-gray-800 rounded-lg gap-x-2 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-            routerLink="/admin/perfil/1">
+            routerLink="/admin/perfil/{{currentUser?.idUser}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
               class="lucide lucide-user-round size-4">
@@ -39,8 +44,36 @@
             </svg>
             Ver perfil
           </a>
+          }
 
-          <button class="flex items-center w-full px-5 py-2 text-xs font-medium text-gray-800 rounded-lg gap-x-2 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+          @if (currentUser?.role?.name === 'supervisor') {
+          <a class="flex items-center px-5 py-2 text-xs font-medium text-gray-800 rounded-lg gap-x-2 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+            routerLink="/supervisor/perfil/{{currentUser?.idUser}}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-user-round size-4">
+              <circle cx="12" cy="8" r="5" />
+              <path d="M20 21a8 8 0 0 0-16 0" />
+            </svg>
+            Ver perfil
+          </a>
+          }
+
+          @if (currentUser?.role?.name === 'seguridad') {
+          <a class="flex items-center px-5 py-2 text-xs font-medium text-gray-800 rounded-lg gap-x-2 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+            routerLink="/seguridad/perfil/{{currentUser?.idUser}}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-user-round size-4">
+              <circle cx="12" cy="8" r="5" />
+              <path d="M20 21a8 8 0 0 0-16 0" />
+            </svg>
+            Ver perfil
+          </a>
+          }
+
+          <button
+            class="flex items-center w-full px-5 py-2 text-xs font-medium text-gray-800 rounded-lg gap-x-2 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
             (click)="logout()">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

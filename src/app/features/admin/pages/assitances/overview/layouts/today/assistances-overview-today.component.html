@@ -47,7 +47,7 @@
           <button *ngFor="let page of pages" (click)="goToPage(page)"
             class="px-3 py-1 text-sm rounded-md hover:bg-gray-200"
             [ngClass]="{ 'bg-primary text-white font-semibold pointer-events-none': page === currentPage }">
-            {{ page }}
+            {{ page + 1 }}
           </button>
         </nav>
       </div>
@@ -55,11 +55,11 @@
     </div>
   </div>
 
-  <div class="space-y-5">
+  <!-- <div class="space-y-5">
     <h2>Asistencias de Hoy</h2>
 
     <section class="p-4 border rounded-lg">
 
     </section>
-  </div>
+  </div> -->
 </section>

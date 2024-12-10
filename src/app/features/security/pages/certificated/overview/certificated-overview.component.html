@@ -1,0 +1,61 @@
+<section class="w-full h-full px-20 py-10 space-y-10">
+
+  <div class="flex items-center justify-between gap-x-3">
+    <h1>Panel de Certificaciones</h1>
+    <input type="text" class="text-xs input" [(ngModel)]="searchInterns" placeholder="Buscar practicante">
+  </div>
+
+  <section class="flex flex-col space-y-10">
+
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle space-y-5">
+
+        @if (isLoading) {
+        <div class="flex items-center justify-center bg-gray-100 rounded-xl min-h-80">
+          <p>Cargando...</p>
+        </div>
+        }
+
+        @else {
+
+        <div class="overflow-hidden rounded-md">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-primary">
+              <tr class="text-xs text-white uppercase">
+                <th scope="col" class="px-6 py-3 font-medium text-start">practicante</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">estado</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">fecha de creacion</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y-2 divide-white">
+              <tr *ngFor="let certification of certifications"
+                routerLink="/seguridad/practicantes/{{certification.idIntern}}"
+                class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-white">
+                <td class="px-6 py-2.5 whitespace-nowrap">{{ certification.user.name }} {{ certification.user.lastname
+                  }}</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ certification.user.status ? 'Activo' : 'Inactivo' }}</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ certification.user.createdAt | localDate }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex items-center justify-between px-6 text-sm gap-x-10">
+          <p>{{ totalCertifications }} resultados</p>
+
+          <!-- Paginador -->
+          <nav class="flex items-center gap-x-1">
+            <button *ngFor="let page of pages" (click)="goToPage(page)"
+              class="px-3 py-1 text-sm rounded-md hover:bg-gray-200"
+              [ngClass]="{ 'bg-primary text-white font-semibold pointer-events-none': page === currentPage }">
+              {{ page }}
+            </button>
+          </nav>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+</section>

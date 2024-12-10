@@ -66,7 +66,7 @@ export class AdminOverviewPageComponent implements OnInit {
     const today = new Date().toISOString().split('T')[0]; // Obtener solo la fecha
     this.assistanceService.getAssistancesByDate(today).subscribe(
       response => {
-        console.log('Response de asistencias de hoy:', response);
+        //console.log('Response de asistencias de hoy:', response);
         this.todaysAttendances = response.data.totalElements; // Total de asistencias
         this.calculateTodaysAttendancePercentage();
       },
@@ -82,7 +82,7 @@ export class AdminOverviewPageComponent implements OnInit {
     const endOfWeek = new Date().toISOString().split('T')[0]; // Fecha actual
     this.assistanceService.getAssistancesByDateRange(startOfWeek, endOfWeek).subscribe(
       response => {
-        console.log('Response de asistencias de la semana:', response);
+        //console.log('Response de asistencias de la semana:', response);
         this.weeklyAttendances = response.data.totalElements; // Total de asistencias de la semana
         this.calculateWeeklyAttendancePercentage();
       },
@@ -98,7 +98,7 @@ export class AdminOverviewPageComponent implements OnInit {
     const endOfMonth = new Date().toISOString().split('T')[0]; // Fecha actual
     this.assistanceService.getAssistancesByDateRange(startOfMonth, endOfMonth).subscribe(
       response => {
-        console.log('Response de asistencias del mes:', response);
+        //console.log('Response de asistencias del mes:', response);
         this.monthlyAttendances = response.data.totalElements; // Total de asistencias del mes
         this.calculateMonthlyAttendancePercentage();
       },

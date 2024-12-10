@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CertificatedService } from '../../../../../core/services/certificated.service';
 import Swal from 'sweetalert2';
 import { Certificated, PaginatedCertificateds } from '../../../../../core/interfaces/certificated.interface';
+import { Intern } from '../../../../../core/interfaces/intern.interface';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'certificated-overview',
@@ -9,93 +12,83 @@ import { Certificated, PaginatedCertificateds } from '../../../../../core/interf
 })
 export class CertificatedOverviewComponent {
 
-  certifications: any[] = [];
-  totalCertifications: number = 0;
-  page: number = 0;
-  size: number = 10;
+  interns: any[] = [];
+  isLoading = true;
+  searchInterns = '';
+  currentPage = 0;
+  pageSize = 10;
+  totalInterns = 0;
   pages: number[] = [];
-  currentPage: number = 1;
-  searchInterns: string = '';
-  isLoading: boolean = true;
 
-  constructor(private certificatedService: CertificatedService) { }
+  certificationsMap: Map<string, Certificated | null> = new Map(); // Mapa para almacenar el certificado o null si no tiene
+
+  constructor(
+    private certificatedService: CertificatedService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.getCertifications();
+    this.loadInterns();
   }
 
-  // Obtener certificaciones
-  getCertifications(): void {
-    this.certificatedService.getEligibleInterns(this.page, this.size).subscribe(
-      (response) => {
-        this.certifications = response.data.content;
-        console.log(this.certifications);
-        this.totalCertifications = response.data.totalElements;
-        this.setPagination();
-        this.isLoading = false;
+  loadInterns(): void {
+    this.isLoading = true;
+    this.certificatedService.getEligibleInterns(this.currentPage, this.pageSize).subscribe({
+      next: (response) => {
+        this.interns = response.data.content;
+        this.totalInterns = response.data.totalElements;
+        this.interns.forEach(intern => this.checkCertificateForIntern(intern));  // Verificamos si tienen certificado
       },
-      (error) => {
-        console.error('Error al obtener las certificaciones', error);
+      error: () => {
+        Swal.fire('Error', 'No se pudieron cargar los practicantes.', 'error');
+      },
+      complete: () => {
         this.isLoading = false;
-      }
-    );
-  }
-
-  // Buscar practicantes por nombre
-  searchInternsByName(): void {
-    if (this.searchInterns.trim() === '') {
-      this.getCertifications();
-    } else {
-      this.certificatedService.getCertificateByDni(this.searchInterns).subscribe(
-        (response) => {
-          this.certifications = response.data.content;
-          this.totalCertifications = response.data.totalElements;
-          this.setPagination();
-        },
-        (error) => {
-          console.error('Error al buscar practicantes', error);
-        }
-      );
-    }
-  }
-
-  // Generar un certificado
-  generateCertificate(certificationId: string): void {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Se generará un nuevo certificado',
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, generar',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.certificatedService.generateCertificate(certificationId).subscribe(
-          () => {
-            Swal.fire('¡Generado!', 'El certificado ha sido generado', 'success');
-            this.getCertifications();
-          },
-          (error) => {
-            console.error('Error al generar el certificado', error);
-            Swal.fire('Error', 'No se pudo generar el certificado', 'error');
-          }
-        );
       }
     });
   }
 
-  // Configurar paginación
-  setPagination(): void {
-    this.pages = Array.from({ length: Math.ceil(this.totalCertifications / this.size) }, (_, i) => i + 1);
+  search(): void {
+    this.currentPage = 1;
+    this.loadInterns();
   }
 
-  // Cambiar de página
   goToPage(page: number): void {
-    this.page = page - 1;
     this.currentPage = page;
-    this.getCertifications();
+    this.loadInterns();
   }
+
+
+  // Método para verificar si el intern tiene certificado
+  checkCertificateForIntern(intern: Intern): void {
+    this.certificatedService.getCertificateByDni(intern.user.dni).subscribe({
+      next: (response) => {
+        // Si el response tiene un certificado, lo guardamos en el mapa
+        if (response.data && response.data.idCertificated) {
+          this.certificationsMap.set(intern.user.dni, response.data); // Guardamos el certificado completo
+        } else {
+          this.certificationsMap.set(intern.user.dni, null); // No tiene certificado
+        }
+      },
+      error: () => {
+        this.certificationsMap.set(intern.user.dni, null); // Error o no tiene certificado
+      }
+    });
+  }
+
+  generateCertificate(dni: string): void {
+    this.certificatedService.generateCertificate(dni).subscribe({
+      next: () => {
+        Swal.fire('Éxito', 'Certificado generado con éxito', 'success');
+        this.loadInterns();  // Recargar la lista de practicantes
+      },
+      error: (error: HttpErrorResponse) => {
+        // Revisar si el error tiene un mensaje de error desde el backend
+        const errorMessage = error?.error?.error || 'No se pudo generar el certificado.';
+        Swal.fire('Error', errorMessage, 'error');
+      }
+    });
+  }
+
 
 }
