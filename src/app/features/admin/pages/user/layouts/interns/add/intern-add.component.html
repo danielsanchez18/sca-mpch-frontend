@@ -79,10 +79,9 @@
     <div class="flex flex-col space-y-2">
       <label for="totalHours" class="text-sm font-medium">Horas Trabajadas</label>
       <input type="number" class="input" id="totalHours" [(ngModel)]="intern.totalHours" name="totalHours"
-        #totalHours="ngModel" required min="1" />
+        #totalHours="ngModel" required />
       <p *ngIf="totalHours.invalid && (totalHours.dirty || totalHours.touched)" class="text-sm text-red-600">
         <span *ngIf="totalHours.errors?.['required']">El número de horas trabajadas es obligatorio.</span>
-        <span *ngIf="totalHours.errors?.['min']">Debe ingresar al menos 1 hora trabajada.</span>
       </p>
     </div>
 
