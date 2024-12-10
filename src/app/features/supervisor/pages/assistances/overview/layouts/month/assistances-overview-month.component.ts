@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AssistanceService } from '../../../../../../../core/services/assistance.service';
 
 @Component({
   selector: 'assistances-overview-month',
   templateUrl: './assistances-overview-month.component.html',
 })
-export class SecurityAssistancesOverviewMonthComponent {
+export class SupervisorAssistancesOverviewMonthComponent implements OnInit {
 
   assistances: any[] = [];
   totalAssistances = 0;

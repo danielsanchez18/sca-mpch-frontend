@@ -1,0 +1,102 @@
+<section class="w-full h-full px-20 py-10 space-y-10">
+
+  <div class="flex items-center gap-x-3">
+    <a routerLink=".." class="p-1 text-gray-500 rounded-full hover:text-black hover:bg-gray-200">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-chevron-left size-5">
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+    </a>
+    <h1>Detalles de Universidad</h1>
+  </div>
+
+  <div class="grid gap-10 px-10">
+
+    <article class="col-span-2 space-y-10">
+
+      <div class="grid grid-cols-[auto_1fr] px-10 gap-x-10">
+        <div class="bg-gray-100 rounded-full size-40">
+          <img src="img/university-logo.jpg" alt="" class="object-cover p-2 rounded-full">
+
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex items-center gap-x-10">
+            <h1 class="">{{ university?.name }}</h1>
+            <section class="flex items-center gap-x-2">
+              <div [ngClass]="{'bg-green-500': university?.status, 'bg-red-500': !university?.status}"
+                class="rounded-full size-3"></div>
+              <p class="text-sm font-medium">{{ university?.status ? 'Activo' : 'Inactivo' }}</p>
+            </section>
+          </div>
+          <div class="flex items-center gap-x-3">
+            <p class="text-sm">Acrónimo:</p>
+            <p class="text-sm font-semibold">{{ university?.acronym }}</p>
+          </div>
+          <div class="flex items-center gap-x-3">
+            <p class="text-sm">Practicantes asociados:</p>
+            <p class="text-sm font-semibold">{{ activeInterns.length }}</p>
+          </div>
+
+        </div>
+      </div>
+
+      <article class="px-10 py-5 space-y-2 bg-gray-100 rounded-3xl">
+        <h3>Reporte de practicantes</h3>
+
+        <h1>{{ activeInterns.length }}</h1>
+
+        <div class="w-full h-52">
+          <img class="w-full h-full" src="img/charts.png" alt="">
+        </div>
+      </article>
+
+      <div class="flex flex-col">
+        <div class="-m-1.5 overflow-x-auto">
+          <div class="p-1.5 min-w-full inline-block align-middle space-y-5">
+            <h2>Lista de practicantes ({{ activeInterns.length }})</h2>
+
+            <div class="overflow-hidden rounded-md">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-primary">
+                  <tr class="text-xs text-white uppercase">
+                    <th scope="col" class="px-6 py-3 font-medium text-start">Nombre</th>
+                    <th scope="col" class="px-6 py-3 font-medium text-center">área</th>
+                    <th scope="col" class="px-6 py-3 font-medium text-center">Fecha de reg.</th>
+                    <th scope="col" class="px-6 py-3 font-medium text-center">hrs. completadas</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y-2 divide-white">
+                  <tr *ngFor="let intern of activeInterns"
+                    [routerLink]="['/admin/usuarios/practicantes', intern.idIntern]"
+                    class="text-sm font-medium text-gray-800 uppercase bg-gray-100 cursor-pointer hover:bg-gray-50">
+                    <td class="px-6 py-2.5 whitespace-nowrap">{{ intern.user.name }} {{ intern.user.lastname }}</td>
+                    <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ intern.areaUniversity.area.name }}</td>
+                    <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ intern.user.createdAt | localDate }}</td>
+                    <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ intern.totalHours | DecimalHours }}/{{
+                      intern.areaUniversity.hoursCertified }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="flex items-center justify-between px-6 text-sm gap-x-10">
+              <p>{{ activeInterns.length }} resultados</p>
+
+              <nav class="flex items-center">
+                <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i + 1)"
+                  class="px-3 py-1 text-sm rounded-md hover:bg-gray-200"
+                  [ngClass]="{ 'bg-primary text-white font-semibold pointer-events-none': i === currentPage }">
+                  {{ i + 1 }}
+                </button>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </article>
+  </div>
+
+</section>

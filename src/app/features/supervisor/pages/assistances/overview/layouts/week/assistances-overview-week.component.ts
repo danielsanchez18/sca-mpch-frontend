@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AssistanceService } from '../../../../../../../core/services/assistance.service';
 
 @Component({
-  selector: 'assistances-overview-month',
-  templateUrl: './assistances-overview-month.component.html',
+  selector: 'assistances-overview-week',
+  templateUrl: './assistances-overview-week.component.html',
 })
-export class SecurityAssistancesOverviewMonthComponent {
+export class SupervisorAssistancesOverviewWeekComponent implements OnInit {
 
   assistances: any[] = [];
   totalAssistances = 0;
@@ -20,21 +20,32 @@ export class SecurityAssistancesOverviewMonthComponent {
   constructor(private assistanceService: AssistanceService) {}
 
   ngOnInit(): void {
-    this.calculateCurrentMonth();
-    this.loadMonthlyAssistances();
+    this.calculateCurrentWeek();
+    this.loadWeeklyAssistances();
   }
 
-  calculateCurrentMonth(): void {
+  calculateCurrentWeek(): void {
     const today = new Date();
+    const dayOfWeek = today.getDay();
+    const diffToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
 
-    const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-    this.startDate = firstDay.toISOString().split('T')[0];
-    const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-    this.endDate = lastDay.toISOString().split('T')[0];
+    // Obtener el lunes de la semana
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - diffToMonday);
 
-  }
+    // Obtener el domingo de la semana
+    const sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6);
 
-  loadMonthlyAssistances(): void {
+    // Función para formatear las fechas a yyyy-MM-dd
+    const formatDate = (date: Date) => date.toLocaleDateString('en-CA'); // Formato yyyy-MM-dd
+
+    this.startDate = formatDate(monday);
+    this.endDate = formatDate(sunday);
+}
+
+
+  loadWeeklyAssistances(): void {
     this.isLoading = true;
     this.assistanceService.getAssistancesByDateRange(this.startDate, this.endDate, this.currentPage, this.pageSize).subscribe({
       next: (response) => {
@@ -44,7 +55,7 @@ export class SecurityAssistancesOverviewMonthComponent {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error cargando asistencias mensuales:', error);
+        console.error('Error cargando asistencias semanales:', error);
         this.isLoading = false;
       },
     });
@@ -52,7 +63,7 @@ export class SecurityAssistancesOverviewMonthComponent {
 
   searchAssistancesByName(): void {
     if (this.searchName.trim() === '') {
-      this.loadMonthlyAssistances();
+      this.loadWeeklyAssistances();
       return;
     }
 
@@ -78,7 +89,7 @@ export class SecurityAssistancesOverviewMonthComponent {
 
     this.currentPage = page;
     if (this.searchName.trim() === '') {
-      this.loadMonthlyAssistances();
+      this.loadWeeklyAssistances();
     } else {
       this.searchAssistancesByName();
     }

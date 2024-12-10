@@ -1,0 +1,61 @@
+<section class="w-full h-full px-20 py-10 space-y-10">
+
+  <h1>Panel de Universidades ({{ totalUniversities }})</h1>
+
+  <section class="flex flex-col space-y-10">
+
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle space-y-5">
+
+        <div class="flex items-center justify-between gap-x-3">
+          <input type="text" [(ngModel)]="searchUniversities" class="text-xs input" placeholder="Buscar universidad"
+            (input)="searchUniversitiesByName()">
+        </div>
+
+        @if (isLoading) {
+        <div class="flex items-center justify-center bg-gray-100 rounded-xl min-h-80">
+          <p>Cargando...</p>
+        </div>
+        }
+
+        @else {
+
+        <div class="overflow-hidden rounded-md min-h-80">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-primary">
+              <tr class="text-xs text-white uppercase">
+                <th scope="col" class="px-6 py-3 font-medium text-start">Nombre</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">acronimo</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">practicantes aso.</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y-2 divide-white">
+              <tr *ngFor="let university of universities" routerLink="{{ university.idUniversity }}"
+                class="text-sm font-medium text-gray-800 uppercase bg-gray-100 hover:bg-white hover:cursor-pointer">
+                <td class="px-6 py-2.5 whitespace-nowrap">{{ university.name }}</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ university.acronym }}</td>
+                <td class="px-6 py-2.5 text-center whitespace-nowrap">{{ university['internCount'] }}</td>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex items-center justify-between px-6 text-sm gap-x-10">
+          <p>{{ totalUniversities }} resultados</p>
+
+          <nav class="flex items-center">
+            <button *ngFor="let page of pages" (click)="goToPage(page)"
+              class="px-3 py-1 text-sm rounded-md hover:bg-gray-200"
+              [ngClass]="{ 'bg-primary text-white font-semibold pointer-events-none': page === currentPage }">
+              {{ page }}
+            </button>
+          </nav>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+</section>

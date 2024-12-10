@@ -1,0 +1,64 @@
+<section class="px-20 py-10 space-y-10 size-full">
+  <div class="flex items-center gap-x-3">
+    <a routerLink=".." class="p-1 text-gray-500 rounded-full hover:text-black hover:bg-gray-200">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="lucide lucide-chevron-left size-5">
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+    </a>
+    <h1>Detalles del Practicante</h1>
+  </div>
+
+  <article class="grid grid-cols-[auto_1fr] px-10 gap-x-10">
+    <div class="bg-gray-100 rounded-full size-40">
+
+      <img src="img/user.webp" alt="" class="object-cover p-2 rounded-full">
+
+    </div>
+
+    <div class="space-y-2">
+      <div class="flex items-center gap-x-10">
+        <h1 class="">{{ intern.user.name }} {{ intern.user.lastname }}</h1>
+        <section class="flex items-center gap-x-2">
+          <div [ngClass]="{'bg-green-500': intern.user.status, 'bg-red-500': !intern.user.status}" class="rounded-full size-3"></div>
+          <p class="text-sm font-medium">{{ intern.user.status ? 'Activo' : 'Inactivo' }}</p>
+        </section>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">ID de Practicante:</p>
+        <p class="text-sm font-semibold">{{ intern.idIntern }}</p>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">DNI:</p>
+        <p class="text-sm font-semibold">{{ intern.user.dni }}</p>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">Área:</p>
+        <p class="text-sm font-semibold">{{ intern.areaUniversity.area.name }}</p>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">Universidad:</p>
+        <p class="text-sm font-semibold">{{ intern.areaUniversity.university.name }}</p>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">Horas Trabajadas/Horas de Certificacion:</p>
+        <p class="text-sm font-semibold">{{ intern.totalHours}}/{{intern.areaUniversity.hoursCertified}} horas</p>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">Fecha de Nacimiento:</p>
+        <p class="text-sm font-semibold">{{ intern.user.birthdate | localDate }}</p>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">Fecha de Registro:</p>
+        <p class="text-sm font-semibold">{{ intern.user.createdAt | date: 'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="flex items-center gap-x-3">
+        <p class="text-sm">Fecha de Modificacion:</p>
+        <p class="text-sm font-semibold">{{ intern.user.updatedAt ? (intern.user.updatedAt | date: 'dd/MM/yyyy') : '-' }}</p>
+      </div>
+
+    </div>
+  </article>
+
+</section>

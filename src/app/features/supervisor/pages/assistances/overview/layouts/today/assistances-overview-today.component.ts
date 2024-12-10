@@ -1,42 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AssistanceService } from '../../../../../../../core/services/assistance.service';
 
 @Component({
-  selector: 'assistances-overview-month',
-  templateUrl: './assistances-overview-month.component.html',
+  selector: 'assistances-overview-today',
+  templateUrl: './assistances-overview-today.component.html',
 })
-export class SecurityAssistancesOverviewMonthComponent {
+export class SupervisorAssistancesOverviewTodayComponent implements OnInit {
 
-  assistances: any[] = [];
-  totalAssistances = 0;
-  pages: number[] = [];
-  currentPage = 0;
-  pageSize = 10;
-  isLoading = false;
-  searchName = '';
-  startDate!: string;
-  endDate!: string;
+  assistances: any[] = []; // Lista de asistencias
+  totalAssistances = 0; // Total de resultados
+  pages: number[] = []; // Páginas disponibles
+  currentPage = 0; // Página actual
+  pageSize = 10; // Tamaño de página
+  isLoading = false; // Indicador de carga
+  searchName = ''; // Nombre para búsqueda
 
   constructor(private assistanceService: AssistanceService) {}
 
   ngOnInit(): void {
-    this.calculateCurrentMonth();
-    this.loadMonthlyAssistances();
+    this.loadAssistancesForToday();
   }
 
-  calculateCurrentMonth(): void {
-    const today = new Date();
-
-    const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-    this.startDate = firstDay.toISOString().split('T')[0];
-    const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-    this.endDate = lastDay.toISOString().split('T')[0];
-
-  }
-
-  loadMonthlyAssistances(): void {
+  // Cargar asistencias del día de hoy
+  loadAssistancesForToday(): void {
     this.isLoading = true;
-    this.assistanceService.getAssistancesByDateRange(this.startDate, this.endDate, this.currentPage, this.pageSize).subscribe({
+    const today = new Date(); // Fecha en formato yyyy-MM-dd
+    const localDate = today.toLocaleDateString('en-CA');
+    this.assistanceService.getAssistancesByDate(localDate, this.currentPage, this.pageSize).subscribe({
       next: (response) => {
         this.assistances = response.data.content || [];
         this.totalAssistances = response.data.totalElements || 0;
@@ -44,15 +34,16 @@ export class SecurityAssistancesOverviewMonthComponent {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error cargando asistencias mensuales:', error);
+        console.error('Error cargando asistencias:', error);
         this.isLoading = false;
       },
     });
   }
 
+  // Buscar asistencias por nombre de practicante
   searchAssistancesByName(): void {
     if (this.searchName.trim() === '') {
-      this.loadMonthlyAssistances();
+      this.loadAssistancesForToday();
       return;
     }
 
@@ -65,20 +56,21 @@ export class SecurityAssistancesOverviewMonthComponent {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error buscando asistencias:', error);
+        //console.error('Error buscando asistencias:', error);
         this.isLoading = false;
       },
     });
   }
 
+  // Cambiar a una página específica
   goToPage(page: number): void {
     if (page === this.currentPage) {
-      return;
+      return; // Evitar recarga innecesaria
     }
 
     this.currentPage = page;
     if (this.searchName.trim() === '') {
-      this.loadMonthlyAssistances();
+      this.loadAssistancesForToday();
     } else {
       this.searchAssistancesByName();
     }

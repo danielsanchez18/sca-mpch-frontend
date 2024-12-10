@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { User } from '../../../../../core/interfaces/user.interface';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { Router } from '@angular/router';
-import { User } from '../../../../../core/interfaces/user.interface';
 
 @Component({
   selector: 'profile-details',
   templateUrl: './profile-details.component.html',
 })
-export class SecurityProfileDetailsComponent {
+export class SupervisorProfileDetailsComponent {
 
   currentUser: User | null = null;
   userName: string = '';
