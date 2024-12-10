@@ -44,7 +44,7 @@ export class SupervisorEditComponent implements OnInit {
     this.supervisorService.getSupervisorById(this.idSupervisor).subscribe(
       response => {
         this.supervisor = response.data; // Cargar los datos del supervisor en el formulario
-
+        console.log(this.supervisor);
         // Si el backend devuelve la fecha en un formato completo, la convertimos al formato requerido
         if (this.supervisor.user.birthdate) {
           // Convertir la fecha a formato "yyyy-MM-dd"
@@ -71,13 +71,14 @@ export class SupervisorEditComponent implements OnInit {
   }
 
   updateSupervisor(): void {
-    // Convertir el estado de booleano a 1 o 0 si es necesario
     const updatedSupervisor = {
       ...this.supervisor,
       user: {
         ...this.supervisor.user,
-        status: this.supervisor.user.status ? 1 : 0 // Convertir a 1 o 0
-      }
+      },
+      area: {
+        ...this.supervisor.area,
+      },
     };
 
     this.supervisorService.updateSupervisor(this.idSupervisor, updatedSupervisor).subscribe(

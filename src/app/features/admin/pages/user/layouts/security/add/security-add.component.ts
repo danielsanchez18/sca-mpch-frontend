@@ -39,16 +39,16 @@ export class SecurityAddComponent {
     this.securityService.addSecurity(this.security).subscribe(
       (response: any) => {
         if (response && response.message) {
-          console.log('Respuesta del servidor al agregar el seguridad', response);
+          //console.log('Respuesta del servidor al agregar el seguridad', response);
           Swal.fire('Éxito', response.message, 'success');
           this.router.navigate(['/admin/usuarios/seguridad']); // Redirigir a la lista de administradores
         } else {
-          console.log('Respuesta del servidor al agregar el seguridad', response);
+          //console.log('Respuesta del servidor al agregar el seguridad', response);
           Swal.fire('Error', 'No se pudo agregar el seguridad.', 'error');
         }
       },
       (error: HttpErrorResponse) => {
-        console.error('Error al registrar seguridad:', error);
+        //console.error('Error al registrar seguridad:', error);
         const errorMessage = error?.error?.error || 'No se pudo agregar el seguridad.';
         Swal.fire('Error', errorMessage, 'error');
       }

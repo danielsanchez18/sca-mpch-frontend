@@ -48,7 +48,6 @@ export class AreasEditComponent implements OnInit {
     // Convertir el estado de booleano a 1 o 0 si es necesario
     const updatedArea = {
       ...this.area,
-      status: this.area.status ? 1 : 0 // Convertir a 1 o 0
     }
 
     this.areaService.updateArea(this.idArea, updatedArea).subscribe(

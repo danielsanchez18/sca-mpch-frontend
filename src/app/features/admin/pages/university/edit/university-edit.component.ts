@@ -50,7 +50,6 @@ export class UniversityEditComponent implements OnInit {
     // Convertir el estado de booleano a 1 o 0 si es necesario
     const updatedUniversity = {
       ...this.university,
-      status: this.university.status ? 1 : 0 // Convertir a 1 o 0
     }
 
     this.universityService.updateUniversity(this.idUniversity, updatedUniversity).subscribe(
@@ -60,6 +59,7 @@ export class UniversityEditComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         const errorMessage = error?.error?.error || 'No se actulaizar la universidad.';
+        Swal.fire('Error', errorMessage, 'error');
       }
     )
   }

@@ -47,7 +47,7 @@ export class SecurityAssistancesRegisterComponent implements OnInit {
     this.assistanceService.registerCheckIn(this.dni).subscribe(
       (response) => {
         Swal.fire('Éxito', 'Entrada registrada correctamente.', 'success');
-        this.router.navigate(['/admin/asistencias']);
+        this.router.navigate(['/seguridad/asistencias']);
       },
       (error: HttpErrorResponse) => {
         // Revisar si el error tiene un mensaje de error desde el backend
@@ -67,7 +67,7 @@ export class SecurityAssistancesRegisterComponent implements OnInit {
     this.assistanceService.registerCheckOut(this.dni).subscribe(
       (response) => {
         Swal.fire('Éxito', 'Salida registrada correctamente.', 'success');
-        this.router.navigate(['/admin/asistencias']);
+        this.router.navigate(['/seguridad/asistencias']);
 
       },
       (error: HttpErrorResponse) => {
